@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 14:32:00 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
+/*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
+/*   Updated: 2020/02/20 12:01:51 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CUB3D_H
+#define CUB3D_H
 
-char	*ft_strjoin(const char *s1, const char *s2)
+typedef struct	data_s
 {
-	size_t	len;
-	char	*newstr;
+	void		*mlx_ptr;
+	void		*mlx_win;
+}				data_t;
 
-	if (s1 == 0 && s2 == 0)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + 2;
-	if ((newstr = malloc(sizeof(*newstr) * len)) == NULL)
-		return (NULL);
-	ft_strlcpy(newstr, s1, len);
-	ft_strlcat(newstr, s2, len);
-	return (newstr);
-}
+typedef struct	color_s
+{
+	int 		R;
+	int 		G;
+	int 		B;
+}				color_t;
+
+typedef struct	cub_s
+{
+	int 		width;
+	int 		height;
+	char 		*NO;
+	char 		*EA;
+	char 		*SO;
+	char		*WE;
+	char 		*sprite;
+	color_t		sol;
+	color_t		plafond;
+}				cub_t;
+
+#endif

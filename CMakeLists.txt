@@ -8,15 +8,18 @@ set(CMAKE_C_FLAGS "-Wextra -Wall -Werror")
 
 set(PROJECT_LINK_MLX libmlx.dylib)
 link_directories(mlx)
-set(PROJECT_LINK_LIBFT libft.a)
-link_directories(libft)
+#set(PROJECT_LINK_LIBFT libft.a)
+#link_directories(libft)
 
 include_directories(includes)
+include_directories(libft)
+include_directories(mlx)
 
 file(GLOB SRCS "srcs/*.c")
+file(GLOB LIBFT "libft/*.c")
 
-add_executable(cub3d ${SRCS})
+add_executable(cub3d ${SRCS} ${LIBFT})
 
-target_link_libraries(cub3d ${PROJECT_LINK_LIBFT})
+#target_link_libraries(cub3d ${PROJECT_LINK_LIBFT})
 target_link_libraries(cub3d ${PROJECT_LINK_MLX})
 target_link_libraries(cub3d "-framework OpenGL -framework AppKit")
