@@ -23,7 +23,8 @@ int main(void)
 	if ((data.mlx_win = mlx_new_window(data.mlx_ptr, width, height, "Hello world"))
 	== NULL)
 		return (EXIT_FAILURE);
-	image = mlx_png_file_to_image(data.mlx_ptr, "Test.png", &width, &height);
+	image = mlx_png_file_to_image(data.mlx_ptr, "images/test.png", &width,
+			&height);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, image, 0, 0);
 	mlx_loop(data.mlx_ptr);
 	return (EXIT_SUCCESS);

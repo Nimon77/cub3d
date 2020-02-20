@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_C_FLAGS "-Wextra -Wall -Werror")
 
-set(PROJECT_LINK_MLX libmlx.a)
+set(PROJECT_LINK_MLX libmlx.dylib)
 link_directories(mlx)
 set(PROJECT_LINK_LIBFT libft.a)
 link_directories(libft)
