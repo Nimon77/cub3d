@@ -60,7 +60,9 @@ SRC_NAME    = 	ft_memset.c			\
 		  		ft_lstdelone.c		\
 		  		ft_lstclear.c		\
 		  		ft_lstiter.c		\
-		  		ft_lstmap.c
+		  		ft_lstmap.c			\
+		  		get_next_line.c		\
+
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
