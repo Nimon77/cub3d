@@ -13,6 +13,8 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+#include "mlx.h"
+
 typedef struct	data_s
 {
 	void		*mlx_ptr;
