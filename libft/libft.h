@@ -6,14 +6,14 @@
 /*   By: nsimon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:52 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/20 08:01:54 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/21 22:16:26 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFFER_SIZE 32
+# define BUFFER_SIZE 64
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -38,6 +38,7 @@ int					ft_atoi(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					get_next_line(int fd, char **line);
+int					ft_atoi_base(char *str, char *base);
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
@@ -64,6 +65,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 																	size_t len);
 char				*ft_itoa(int n);
 char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+char				*ft_itoa_base(int nbr, char *base);
 char				**ft_split(const char *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);

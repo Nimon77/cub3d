@@ -1,4 +1,4 @@
-/sgoinfre/goinfre/Perso/nsimon/apps/CLion/ch-0/193.6494.38/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/nsimon/Documents/cub3d
+"/Users/nsimon/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-1/201.5616.31/CLion 2020.1 EAP.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/nsimon/CLionProjects/cub3d
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/nsimon/Documents/cub3d/cmake-build-debug
+-- Build files have been written to: /Users/nsimon/CLionProjects/cub3d/cmake-build-debug

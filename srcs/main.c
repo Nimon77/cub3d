@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/21 16:57:00 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/21 21:07:44 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,27 @@ int main(void)
 	return (EXIT_SUCCESS);
 }**/
 
-void	get_size(char *str, cub_t *cub)
+int	init(cub_t *cub)
 {
-	int	i;
-	int j;
-	
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (ft_isdigit(str[i]))
-		{
-			cub->height = ft_atoi(&str[i++]);
-			while (!ft_isdigit(str[i - 1]) && ft_isdigit(str[i]))
-				i++;
-			cub->width = ft_atoi(&str[i]);
-		}
-		i++;
-	}
+	if ((cub->m_ptr = mlx_init()) == NULL)
+		return (EXIT_FAILURE);
+	cub->width = 0;
+	cub->height = 0;
+	cub->map = malloc(sizeof(*cub->map));
+	cub->map = NULL;
+	return (0);
 }
 
-void	ft_parser(char *str, cub_t *cub)
+void aff_map(t_list *map)
 {
-	str[0] == 'R' ? get_size(str, cub) : 0;
+	t_list *current;
+	
+	current = map;
+	while (current != NULL)
+	{
+		printf("%s\n", current->content);
+		current = current->next;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -101,13 +100,16 @@ int	main(int argc, char **argv)
 	
 	if (argc > 1)
 	{
+		if (init(&cub) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		fd = open(argv[1], O_RDONLY);
 		while (get_next_line(fd, &str) > 0)
 		{
-			ft_parser(str, &cub);
-			printf("%s\n", str);
+			ft_parse(str, &cub);
 			free(str);
 		}
+		aff_map(cub.map);
+		printf("%d", ft_lstsize(cub.map));
 		close(fd);
 	}
 	
