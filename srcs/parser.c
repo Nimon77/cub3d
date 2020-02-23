@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/21 22:16:26 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/23 11:27:39 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,23 @@ void	get_map(char *str, cub_t *cub)
 	free(line);
 }
 
+char 	*convert_hexa(char *str)
+{
+	int 	value;
+	
+	value = ft_atoi(str);
+	if (value == 0)
+		return (ft_strdup("00"));
+	else
+		return (ft_itoa_base(value, "0123456789ABCDEF"));
+}
+
 int		get_color(char *str)
 {
 	int		i;
 	int		j;
-	char	*color;
-	char 	hexa[17] = "0123456789abcdef";
-	char 	deci[11] = "0123456789";
+	int		value;
+	char	*col[2];
 	color_t	rvb;
 	
 	i = 2;
@@ -87,8 +97,14 @@ int		get_color(char *str)
 	j = 0;
 	while (ft_isdigit(str[i]) && j < 4)
 		rvb.B[j++] = str[i++];
-	color = ft_strjoin(NULL, ft_itoa_base(ft_atoi_base(rvb.R, hexa), deci));
-	return (0xFFFFFF);
+	col[0] = convert_hexa(rvb.R);
+	col[1] = ft_strjoin(col[0], convert_hexa(rvb.V));
+	free(col[0]);
+	col[0] = ft_strjoin(col[1], convert_hexa(rvb.B));
+	free(col[1]);
+	value = ft_atoi_base(col[0], "0123456789ABCDEF");
+	free(col[0]);
+	return (value);
 }
 
 void	ft_parse(char *str, cub_t *cub)

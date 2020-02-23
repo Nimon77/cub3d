@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/21 21:07:44 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/23 11:36:41 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,28 @@ void aff_map(t_list *map)
 	}
 }
 
+void	put_color(int color, cub_t *cub)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (i < cub->height)
+	{
+		j = 0;
+		while (j < cub->width)
+			mlx_pixel_put(cub->m_ptr, cub->m_win, i, j++, color);
+		i++;
+	}
+}
+
+void	aff_couleur(cub_t *cub)
+{
+	cub->m_win = mlx_new_window(cub->m_ptr, cub->width, cub->height, "cub3d");
+	put_color(cub->sol, cub);
+	mlx_loop(cub->m_ptr);
+}
+
 int	main(int argc, char **argv)
 {
 	int   fd;
@@ -109,7 +131,7 @@ int	main(int argc, char **argv)
 			free(str);
 		}
 		aff_map(cub.map);
-		printf("%d", ft_lstsize(cub.map));
+		aff_couleur(&cub);
 		close(fd);
 	}
 	

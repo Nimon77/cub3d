@@ -393,6 +393,33 @@ libft/ft_itoa.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_itoa.c.s
 .PHONY : libft/ft_itoa.c.s
 
+libft/ft_itoa_base.o: libft/ft_itoa_base.c.o
+
+.PHONY : libft/ft_itoa_base.o
+
+# target to build an object file
+libft/ft_itoa_base.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_itoa_base.c.o
+.PHONY : libft/ft_itoa_base.c.o
+
+libft/ft_itoa_base.i: libft/ft_itoa_base.c.i
+
+.PHONY : libft/ft_itoa_base.i
+
+# target to preprocess a source file
+libft/ft_itoa_base.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_itoa_base.c.i
+.PHONY : libft/ft_itoa_base.c.i
+
+libft/ft_itoa_base.s: libft/ft_itoa_base.c.s
+
+.PHONY : libft/ft_itoa_base.s
+
+# target to generate assembly for a file
+libft/ft_itoa_base.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_itoa_base.c.s
+.PHONY : libft/ft_itoa_base.c.s
+
 libft/ft_lstadd_back.o: libft/ft_lstadd_back.c.o
 
 .PHONY : libft/ft_lstadd_back.o
@@ -851,33 +878,6 @@ libft/ft_putendl_fd.s: libft/ft_putendl_fd.c.s
 libft/ft_putendl_fd.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_putendl_fd.c.s
 .PHONY : libft/ft_putendl_fd.c.s
-
-libft/ft_putnbr_base.o: libft/ft_putnbr_base.c.o
-
-.PHONY : libft/ft_putnbr_base.o
-
-# target to build an object file
-libft/ft_putnbr_base.c.o:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_putnbr_base.c.o
-.PHONY : libft/ft_putnbr_base.c.o
-
-libft/ft_putnbr_base.i: libft/ft_putnbr_base.c.i
-
-.PHONY : libft/ft_putnbr_base.i
-
-# target to preprocess a source file
-libft/ft_putnbr_base.c.i:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_putnbr_base.c.i
-.PHONY : libft/ft_putnbr_base.c.i
-
-libft/ft_putnbr_base.s: libft/ft_putnbr_base.c.s
-
-.PHONY : libft/ft_putnbr_base.s
-
-# target to generate assembly for a file
-libft/ft_putnbr_base.c.s:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/ft_putnbr_base.c.s
-.PHONY : libft/ft_putnbr_base.c.s
 
 libft/ft_putnbr_fd.o: libft/ft_putnbr_fd.c.o
 
@@ -1458,6 +1458,9 @@ help:
 	@echo "... libft/ft_itoa.o"
 	@echo "... libft/ft_itoa.i"
 	@echo "... libft/ft_itoa.s"
+	@echo "... libft/ft_itoa_base.o"
+	@echo "... libft/ft_itoa_base.i"
+	@echo "... libft/ft_itoa_base.s"
 	@echo "... libft/ft_lstadd_back.o"
 	@echo "... libft/ft_lstadd_back.i"
 	@echo "... libft/ft_lstadd_back.s"
@@ -1509,9 +1512,6 @@ help:
 	@echo "... libft/ft_putendl_fd.o"
 	@echo "... libft/ft_putendl_fd.i"
 	@echo "... libft/ft_putendl_fd.s"
-	@echo "... libft/ft_putnbr_base.o"
-	@echo "... libft/ft_putnbr_base.i"
-	@echo "... libft/ft_putnbr_base.s"
 	@echo "... libft/ft_putnbr_fd.o"
 	@echo "... libft/ft_putnbr_fd.i"
 	@echo "... libft/ft_putnbr_fd.s"

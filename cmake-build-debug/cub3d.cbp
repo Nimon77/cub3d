@@ -114,6 +114,9 @@
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_itoa.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_itoa_base.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_lstadd_back.c">
 			<Option target="cub3d"/>
 		</Unit>
@@ -163,9 +166,6 @@
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_putendl_fd.c">
-			<Option target="cub3d"/>
-		</Unit>
-		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_putnbr_base.c">
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/libft/ft_putnbr_fd.c">
