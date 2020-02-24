@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/23 11:56:32 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/24 20:18:06 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,17 @@ int	init(cub_t *cub)
 	cub->width = 0;
 	cub->height = 0;
 	cub->map = malloc(sizeof(*cub->map));
-	cub->map = NULL;
+	cub->map[0] = ft_strdup("");
 	return (0);
 }
 
-void aff_map(t_list *map)
+void aff_map(char **map)
 {
-	t_list *current;
+	int		i;
 	
-	current = map;
-	while (current != NULL)
-	{
-		printf("%s\n", current->content);
-		current = current->next;
-	}
+	i = 0;
+	while (map[i][0] != '\0')
+		printf("%s\n", map[i++]);
 }
 
 void	put_color(int color, cub_t *cub)
@@ -98,10 +95,10 @@ void	put_color(int color, cub_t *cub)
 	int j;
 	
 	i = 0;
-	while (i < cub->height)
+	while (i < cub->width)
 	{
 		j = 0;
-		while (j < cub->width)
+		while (j < cub->height)
 			mlx_pixel_put(cub->m_ptr, cub->m_win, i, j++, color);
 		i++;
 	}
@@ -123,10 +120,17 @@ int	main(int argc, char **argv)
 			ft_parse(str, &cub);
 			free(str);
 		}
+		ft_parse(str, &cub);
+		free(str);
 		aff_map(cub.map);
-		cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
-		put_color(cub.sol, &cub);
-		mlx_loop(cub.m_ptr);
+		//cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
+		//put_color(cub.plafond, &cub);
+		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.NO->img, 0, 0);
+		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.EA->img, 32, 0);
+		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.SO->img, 64, 0);
+		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.WE->img, 95, 0);
+		//mlx_loop(cub.m_ptr);
+		system("leaks cub3d");
 		close(fd);
 	}
 	

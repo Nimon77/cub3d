@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/21 21:36:51 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/24 16:11:34 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,17 @@
 
 typedef struct	color_s
 {
-	char	R[4];
-	char	V[4];
-	char	B[4];
+	int			R;
+	int			V;
+	int			B;
 }				color_t;
+
+typedef struct	image_s
+{
+	void		*img;
+	int			wdt;
+	int			height;
+}				image_t;
 
 typedef struct	cub_s
 {
@@ -29,16 +36,16 @@ typedef struct	cub_s
 	void		*m_win;
 	int			width;
 	int			height;
-	void		*NO;
-	void		*EA;
-	void		*SO;
-	void		*WE;
-	void 		*sprite;
-	t_list 		*map;
+	image_t		*NO;
+	image_t		*EA;
+	image_t		*SO;
+	image_t		*WE;
+	image_t		*sprite;
+	char 		**map;
 	int			sol;
 	int			plafond;
 }				cub_t;
 
-void	ft_parse(char *str, cub_t *cub);
+int				ft_parse(char *str, cub_t *cub);
 
 #endif
