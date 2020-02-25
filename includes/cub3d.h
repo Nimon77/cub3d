@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/25 19:33:55 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 20:43:38 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	cub_s
 {
 	void		*m_ptr;
 	void		*m_win;
-	double
 	int			width;
 	int			height;
 	image_t		*NO;
@@ -57,6 +56,8 @@ typedef struct	cub_s
 }				cub_t;
 
 void			ft_error(int error);
+void			ft_free_matrice(char **str);
 void			ft_parse(cub_t *cub, char *path);
+int				ft_move(int keycode, void *param);
 
 #endif

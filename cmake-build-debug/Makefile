@@ -1419,6 +1419,33 @@ srcs/main.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/main.c.s
 .PHONY : srcs/main.c.s
 
+srcs/move.o: srcs/move.c.o
+
+.PHONY : srcs/move.o
+
+# target to build an object file
+srcs/move.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/move.c.o
+.PHONY : srcs/move.c.o
+
+srcs/move.i: srcs/move.c.i
+
+.PHONY : srcs/move.i
+
+# target to preprocess a source file
+srcs/move.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/move.c.i
+.PHONY : srcs/move.c.i
+
+srcs/move.s: srcs/move.c.s
+
+.PHONY : srcs/move.s
+
+# target to generate assembly for a file
+srcs/move.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/move.c.s
+.PHONY : srcs/move.c.s
+
 srcs/parser.o: srcs/parser.c.o
 
 .PHONY : srcs/parser.o
@@ -1445,33 +1472,6 @@ srcs/parser.s: srcs/parser.c.s
 srcs/parser.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/parser.c.s
 .PHONY : srcs/parser.c.s
-
-srcs/rotate.o: srcs/rotate.c.o
-
-.PHONY : srcs/rotate.o
-
-# target to build an object file
-srcs/rotate.c.o:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.o
-.PHONY : srcs/rotate.c.o
-
-srcs/rotate.i: srcs/rotate.c.i
-
-.PHONY : srcs/rotate.i
-
-# target to preprocess a source file
-srcs/rotate.c.i:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.i
-.PHONY : srcs/rotate.c.i
-
-srcs/rotate.s: srcs/rotate.c.s
-
-.PHONY : srcs/rotate.s
-
-# target to generate assembly for a file
-srcs/rotate.c.s:
-	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.s
-.PHONY : srcs/rotate.c.s
 
 # Help Target
 help:
@@ -1626,12 +1626,12 @@ help:
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
+	@echo "... srcs/move.o"
+	@echo "... srcs/move.i"
+	@echo "... srcs/move.s"
 	@echo "... srcs/parser.o"
 	@echo "... srcs/parser.i"
 	@echo "... srcs/parser.s"
-	@echo "... srcs/rotate.o"
-	@echo "... srcs/rotate.i"
-	@echo "... srcs/rotate.s"
 .PHONY : help
 
 

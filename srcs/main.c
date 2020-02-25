@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/25 18:28:39 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 21:18:53 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,12 @@ int	main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		ft_parse(&cub, argv[1]);
 		aff_map(cub.map);
+		mlx_do_key_autorepeaton(cub.m_ptr);
 		cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
-		put_color(cub.plafond, &cub);
-		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.NO->img, 0, 0);
-		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.EA->img, 32, 0);
-		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.SO->img, 64, 0);
-		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.WE->img, 95, 0);
-		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.sprite->img, 128, 0);
+		put_color(cub.sol, &cub);
+		mlx_do_sync(cub.m_ptr);
+		mlx_key_hook(cub.m_win, &ft_move, &cub);
 		mlx_loop(cub.m_ptr);
-		system("leaks cub3d");
 	}
 	
 }

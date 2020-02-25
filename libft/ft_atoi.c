@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 10:10:46 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 21:15:09 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ static int	ft_isspace(char c)
 
 static int	get_return(unsigned long long ret, int neg, const char *str)
 {
+	int i;
 	int count;
 
+	i = 0;
 	count = 0;
-	while (*str <= '1' || *str >= '9')
-		str++;
-	while (ft_isdigit(*(str + count)))
+	while (str[i] <= '1' && str[i] >= '9')
+		i++;
+	while (ft_isdigit(str[i + count]))
 		count++;
 	if (count >= 19)
 		return (neg == -1 ? 0 : -1);
