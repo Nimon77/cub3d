@@ -1365,6 +1365,33 @@ libft/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/libft/get_next_line.c.s
 .PHONY : libft/get_next_line.c.s
 
+srcs/error_check.o: srcs/error_check.c.o
+
+.PHONY : srcs/error_check.o
+
+# target to build an object file
+srcs/error_check.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/error_check.c.o
+.PHONY : srcs/error_check.c.o
+
+srcs/error_check.i: srcs/error_check.c.i
+
+.PHONY : srcs/error_check.i
+
+# target to preprocess a source file
+srcs/error_check.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/error_check.c.i
+.PHONY : srcs/error_check.c.i
+
+srcs/error_check.s: srcs/error_check.c.s
+
+.PHONY : srcs/error_check.s
+
+# target to generate assembly for a file
+srcs/error_check.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/error_check.c.s
+.PHONY : srcs/error_check.c.s
+
 srcs/main.o: srcs/main.c.o
 
 .PHONY : srcs/main.o
@@ -1418,6 +1445,33 @@ srcs/parser.s: srcs/parser.c.s
 srcs/parser.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/parser.c.s
 .PHONY : srcs/parser.c.s
+
+srcs/rotate.o: srcs/rotate.c.o
+
+.PHONY : srcs/rotate.o
+
+# target to build an object file
+srcs/rotate.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.o
+.PHONY : srcs/rotate.c.o
+
+srcs/rotate.i: srcs/rotate.c.i
+
+.PHONY : srcs/rotate.i
+
+# target to preprocess a source file
+srcs/rotate.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.i
+.PHONY : srcs/rotate.c.i
+
+srcs/rotate.s: srcs/rotate.c.s
+
+.PHONY : srcs/rotate.s
+
+# target to generate assembly for a file
+srcs/rotate.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/rotate.c.s
+.PHONY : srcs/rotate.c.s
 
 # Help Target
 help:
@@ -1566,12 +1620,18 @@ help:
 	@echo "... libft/get_next_line.o"
 	@echo "... libft/get_next_line.i"
 	@echo "... libft/get_next_line.s"
+	@echo "... srcs/error_check.o"
+	@echo "... srcs/error_check.i"
+	@echo "... srcs/error_check.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
 	@echo "... srcs/parser.o"
 	@echo "... srcs/parser.i"
 	@echo "... srcs/parser.s"
+	@echo "... srcs/rotate.o"
+	@echo "... srcs/rotate.i"
+	@echo "... srcs/rotate.s"
 .PHONY : help
 
 

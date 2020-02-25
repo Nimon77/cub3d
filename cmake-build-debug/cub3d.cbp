@@ -222,10 +222,16 @@
 		<Unit filename="/Users/nsimon/Documents/cub3d/libft/get_next_line.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/error_check.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/main.c">
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/parser.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/rotate.c">
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/Documents/cub3d/CMakeLists.txt">

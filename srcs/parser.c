@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/24 20:17:07 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 18:14:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_free_matrice(char **str)
 	i = 0;
 	while (str[i][0] != '\0')
 		free(str[i++]);
+	free(str[i]);
 	free(str);
 }
 
@@ -74,7 +75,10 @@ void	get_map(char *str, cub_t *cub)
 		i[3]++;
 	tmp = malloc(sizeof(*tmp) * (i[3] + 2));
 	while (i[0] < i[3])
-		tmp[i[0]] = ft_strdup(cub->map[i[0]++]);
+	{
+		tmp[i[0]] = ft_strdup(cub->map[i[0]]);
+		i[0]++;
+	}
 	ft_free_matrice(cub->map);
 	tmp[i[0]] == NULL ? free(tmp[i[0]]) : 0;
 	while (str[i[1]] != '\0')
@@ -115,13 +119,41 @@ int		check_error(cub_t *cub)
 {
 	if (cub->NO == NULL || cub->EA == NULL || cub->SO == NULL ||
 			cub->WE == NULL || cub->sprite == NULL || cub->map == NULL)
-		return (1);
+		ft_error(1);
 	if (cub->sol == -1 || cub->plafond == -1)
-		return (1);
+		ft_error(2);
 	return (0);
 }
 
-int		ft_parse(char *str, cub_t *cub)
+void	get_pose(char **map, cub_t *cub)
+{
+	int x;
+	int y;
+	
+	x = 0;
+	while (map[x][0] != 0)
+	{
+		y = 0;
+		while (map[x][y])
+		{
+			if (ft_isalpha(map[x][y]) && cub->p_x != -1 && cub->p_y != -1)
+				ft_error(3);
+			if ((map[x][y] == 'N' || map[x][y] == 'E' || map[x][y] == 'S' ||
+					map[x][y] == 'W') && cub->p_x == -1 && cub->p_y == -1)
+			{
+				cub->p_x = x;
+				cub->p_y = y;
+				cub->m_x = cub->p_x;
+				cub->m_y = cub->p_y;
+				cub->map[x][y] = '0';
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
+void 	ft_select(char *str, cub_t *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
 	str[0] == 'N' && str[1] == 'O' ? cub->NO = get_texture(str, cub) : 0;
@@ -132,5 +164,22 @@ int		ft_parse(char *str, cub_t *cub)
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
 	str[0] == '1' ? get_map(str, cub) : 0;
-	return (check_error(cub));
+}
+
+void	ft_parse(cub_t *cub, char *path)
+{
+	int		fd;
+	char	*str;
+	
+	fd = open(path, O_RDONLY);
+	while (get_next_line(fd, &str) > 0)
+	{
+		ft_select(str, cub);
+		free(str);
+	}
+	ft_select(str, cub);
+	free(str);
+	check_error(cub);
+	get_pose(cub->map, cub);
+	close(fd);
 }

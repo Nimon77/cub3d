@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/24 20:18:06 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 18:28:39 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	init(cub_t *cub)
 	cub->height = 0;
 	cub->map = malloc(sizeof(*cub->map));
 	cub->map[0] = ft_strdup("");
+	cub->p_x = -1;
+	cub->p_y = -1;
 	return (0);
 }
 
@@ -106,32 +108,23 @@ void	put_color(int color, cub_t *cub)
 
 int	main(int argc, char **argv)
 {
-	int   fd;
-	char  *str;
 	cub_t cub;
 	
 	if (argc > 1)
 	{
 		if (init(&cub) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		fd = open(argv[1], O_RDONLY);
-		while (get_next_line(fd, &str) > 0)
-		{
-			ft_parse(str, &cub);
-			free(str);
-		}
-		ft_parse(str, &cub);
-		free(str);
+		ft_parse(&cub, argv[1]);
 		aff_map(cub.map);
-		//cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
-		//put_color(cub.plafond, &cub);
-		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.NO->img, 0, 0);
-		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.EA->img, 32, 0);
-		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.SO->img, 64, 0);
-		//mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.WE->img, 95, 0);
-		//mlx_loop(cub.m_ptr);
+		cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
+		put_color(cub.plafond, &cub);
+		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.NO->img, 0, 0);
+		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.EA->img, 32, 0);
+		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.SO->img, 64, 0);
+		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.WE->img, 95, 0);
+		mlx_put_image_to_window(cub.m_ptr, cub.m_win, cub.sprite->img, 128, 0);
+		mlx_loop(cub.m_ptr);
 		system("leaks cub3d");
-		close(fd);
 	}
 	
 }

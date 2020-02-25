@@ -6,7 +6,7 @@
 /*   By: nsimon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:52 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/21 22:16:26 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/25 18:25:50 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # define BUFFER_SIZE 512
+# define ABS(x) ((x < 0) ? (-x) : (x))
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -62,7 +63,7 @@ char				*ft_substr(const char *s, unsigned int start, size_t len);
 char				*ft_strjoin(const char *s1, const char *s2);
 char				*ft_strtrim(const char *s1, const char *set);
 char				*ft_strnstr(const char *haystack, const char *needle,
-																	size_t len);
+							size_t len);
 char				*ft_itoa(int n);
 char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char				*ft_itoa_base(int nbr, char *base);

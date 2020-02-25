@@ -62,6 +62,9 @@ SRC_NAME    = 	ft_memset.c			\
 		  		ft_lstiter.c		\
 		  		ft_lstmap.c			\
 		  		get_next_line.c		\
+		  		ft_atoi_base.c		\
+		  		ft_itoa_base.c		\
+		  		ft_abs.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
