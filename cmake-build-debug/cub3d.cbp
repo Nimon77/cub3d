@@ -237,6 +237,9 @@
 		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/parser.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/raycast.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/nsimon/Documents/cub3d/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -1500,6 +1500,33 @@ srcs/parser.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/parser.c.s
 .PHONY : srcs/parser.c.s
 
+srcs/raycast.o: srcs/raycast.c.o
+
+.PHONY : srcs/raycast.o
+
+# target to build an object file
+srcs/raycast.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/raycast.c.o
+.PHONY : srcs/raycast.c.o
+
+srcs/raycast.i: srcs/raycast.c.i
+
+.PHONY : srcs/raycast.i
+
+# target to preprocess a source file
+srcs/raycast.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/raycast.c.i
+.PHONY : srcs/raycast.c.i
+
+srcs/raycast.s: srcs/raycast.c.s
+
+.PHONY : srcs/raycast.s
+
+# target to generate assembly for a file
+srcs/raycast.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/raycast.c.s
+.PHONY : srcs/raycast.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1662,6 +1689,9 @@ help:
 	@echo "... srcs/parser.o"
 	@echo "... srcs/parser.i"
 	@echo "... srcs/parser.s"
+	@echo "... srcs/raycast.o"
+	@echo "... srcs/raycast.i"
+	@echo "... srcs/raycast.s"
 .PHONY : help
 
 

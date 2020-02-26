@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/26 20:35:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/26 21:13:38 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct	cub_s
 	double		p_y;
 	double		d_x;
 	double		d_y;
-	int 		m_x;
-	int 		m_y;
+	double		m_x;
+	double		m_y;
 	int 		hit;
 }				cub_t;
 
