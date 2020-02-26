@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/26 21:13:38 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/26 21:17:08 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ int 	raycast(cub_t *cub)
 		if(drawEnd >= h)drawEnd = h - 1;
 		
 		//choose wall color
-		ColorRGB color;
+		int color;
 		switch(worldMap[mapX][mapY])
 		{
-			case 1:  color = RGB_Red;    break; //red
-			case 2:  color = RGB_Green;  break; //green
-			case 3:  color = RGB_Blue;   break; //blue
-			case 4:  color = RGB_White;  break; //white
-			default: color = RGB_Yellow; break; //yellow
+			case 1:  color = 0xFF0000;    break; //red
+			case 2:  color = 0x00FF00;  break; //green
+			case 3:  color = 0x0000FF;   break; //blue
+			case 4:  color = 0xFFFFFF;  break; //white
+			default: color = 0x0F0F0F; break; //yellow
 		}
 		
 		//give x and y sides different brightness
