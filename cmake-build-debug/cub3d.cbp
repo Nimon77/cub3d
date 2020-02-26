@@ -225,6 +225,9 @@
 		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/error_check.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/events.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/nsimon/Documents/cub3d/srcs/main.c">
 			<Option target="cub3d"/>
 		</Unit>

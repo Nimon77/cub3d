@@ -1392,6 +1392,33 @@ srcs/error_check.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/error_check.c.s
 .PHONY : srcs/error_check.c.s
 
+srcs/events.o: srcs/events.c.o
+
+.PHONY : srcs/events.o
+
+# target to build an object file
+srcs/events.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/events.c.o
+.PHONY : srcs/events.c.o
+
+srcs/events.i: srcs/events.c.i
+
+.PHONY : srcs/events.i
+
+# target to preprocess a source file
+srcs/events.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/events.c.i
+.PHONY : srcs/events.c.i
+
+srcs/events.s: srcs/events.c.s
+
+.PHONY : srcs/events.s
+
+# target to generate assembly for a file
+srcs/events.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/events.c.s
+.PHONY : srcs/events.c.s
+
 srcs/main.o: srcs/main.c.o
 
 .PHONY : srcs/main.o
@@ -1623,6 +1650,9 @@ help:
 	@echo "... srcs/error_check.o"
 	@echo "... srcs/error_check.i"
 	@echo "... srcs/error_check.s"
+	@echo "... srcs/events.o"
+	@echo "... srcs/events.i"
+	@echo "... srcs/events.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
