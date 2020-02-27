@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/26 21:13:38 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/27 18:20:16 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ typedef struct	image_s
 	int			height;
 }				image_t;
 
+typedef struct	coord_dbl_s
+{
+	double	x;
+	double	y;
+}				coord_dbl_t;
+
+typedef struct	coord_int_s
+{
+	int			x;
+	int 		y;
+}				coord_int_t;
+
 typedef struct	cub_s
 {
 	void		*m_ptr;
@@ -54,14 +66,31 @@ typedef struct	cub_s
 	double		d_y;
 	double		m_x;
 	double		m_y;
-	int 		hit;
 }				cub_t;
+
+typedef struct	raycast_s
+{
+	int			x;
+	coord_int_t	map;
+	coord_dbl_t	ray;
+	coord_dbl_t	delta;
+	coord_dbl_t	side;
+	coord_int_t	step;
+	double		WallDist;
+	double		camera;
+	int 		hit;
+}				raycast_t;
 
 void			ft_error(int error);
 void			ft_free_matrice(char **str);
 void			ft_parse(cub_t *cub, char *path);
 void			put_color(int color, cub_t *cub);
 int 			ft_actual(cub_t * cub);
+int 			raycast(cub_t *cub);
+void			go_up(cub_t *cub);
+void			go_down(cub_t *cub);
+void			go_left(cub_t *cub);
+void			go_right(cub_t *cub);
 int				ft_move(int keycode, cub_t *cub);
 
 #endif
