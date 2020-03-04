@@ -15,8 +15,8 @@
 void	init_raycast(raycast_t *raycst, cub_t *cub)
 {
 	raycst->camera = 2 * raycst->x / (double)cub->width - 1;
-	raycst->ray.x = cub->d_x + cub->p_x * raycst.camera;
-	raycst->ray.y = cub->d_y + cub->p_y * raycst.camera;
+	raycst->ray.x = cub->d_x + cub->p_x * raycst->camera;
+	raycst->ray.y = cub->d_y + cub->p_y * raycst->camera;
 	raycst->map.x = (int)cub->p_x;
 	raycst->map.y = (int)cub->p_y;
 	raycst->delta.x = sqrt(1 + (raycst->ray.y * raycst->ray.y) / (raycst->ray.x

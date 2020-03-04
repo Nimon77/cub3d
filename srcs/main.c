@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/27 15:56:50 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/04 19:06:29 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	init(cub_t *cub)
 	cub->map[0] = ft_strdup("");
 	cub->p_x = -1;
 	cub->p_y = -1;
-	cub->hit = 0;
 	return (0);
 }
 
@@ -116,12 +115,14 @@ int	main(int argc, char **argv)
 		if (init(&cub) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		ft_parse(&cub, argv[1]);
-		//aff_map(cub.map);
+		aff_map(cub.map);
 		cub.m_win = mlx_new_window(cub.m_ptr, cub.width, cub.height, "cub3d");
 		//put_color(cub.sol, &cub);
-		mlx_key_hook(cub.m_win, &ft_move, &cub);
+		//mlx_key_hook(cub.m_win, &ft_move, &cub);
+		mlx_hook(cub.m_win, 17, 17, &quit, &cub);
 		//mlx_loop_hook(cub.m_ptr, &raycast, &cub);
 		mlx_loop(cub.m_ptr);
+		quit(&cub);
 	}
 	
 }

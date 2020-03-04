@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	quit(cub_t *cub)
+int		quit(cub_t *cub)
 {
 	printf("quit\n");
 	mlx_destroy_window(cub->m_ptr, cub->m_win);

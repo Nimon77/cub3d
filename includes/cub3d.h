@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/27 18:20:16 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/04 18:18:30 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct	raycast_s
 	int 		hit;
 }				raycast_t;
 
+int				quit(cub_t *cub);
 void			ft_error(int error);
 void			ft_free_matrice(char **str);
 void			ft_parse(cub_t *cub, char *path);

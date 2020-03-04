@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/25 18:14:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/04 17:58:49 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,19 @@ void	ft_free_matrice(char **str)
 
 void	get_map(char *str, cub_t *cub)
 {
-	int 	i[4];
+	int 	i[2];
 	char	**tmp;
-	char 	line[512];
 	
-	i[0] = 0;
+	i[0] = -1;
 	i[1] = 0;
-	i[2] = 0;
-	i[3] = 0;
-	while (cub->map[i[3]][0] != '\0')
-		i[3]++;
-	tmp = malloc(sizeof(*tmp) * (i[3] + 2));
-	while (i[0] < i[3])
-	{
+	while (cub->map[i[1]][0] != '\0')
+		i[1]++;
+	tmp = malloc(sizeof(*tmp) * (i[1] + 2));
+	while (++i[0] < i[1])
 		tmp[i[0]] = ft_strdup(cub->map[i[0]]);
-		i[0]++;
-	}
 	ft_free_matrice(cub->map);
 	tmp[i[0]] == NULL ? free(tmp[i[0]]) : 0;
-	while (str[i[1]] != '\0')
-		str[i[1]] != ' ' ? line[i[2]++] = str[i[1]++] : i[1]++;
-	tmp[i[0]++] = ft_strdup(line);
+	tmp[i[0]++] = ft_strdup(str);
 	tmp[i[0]] = ft_strdup("");
 	cub->map = tmp;
 }
@@ -101,11 +93,14 @@ int		get_color(char *str)
 	rvb.B = -1;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.R == -1)
+		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.R == -1 &&
+				!ft_isdigit(str[i - 1]))
 			rvb.R = ft_atoi(&str[i]);
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.V == -1)
+		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.V == -1 &&
+				rvb.R != -1)
 			rvb.R > -1 ? rvb.V = ft_atoi(&str[i]) : 0;
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.B == -1)
+		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.B == -1 &&
+				rvb.R != -1 && rvb.V != -1)
 			rvb.R > -1 && rvb.V > -1 ? rvb.B = ft_atoi(&str[i]) : 0;
 		i++;
 	}
@@ -163,7 +158,7 @@ void 	ft_select(char *str, cub_t *cub)
 	str[0] == 'S' && str[1] == ' ' ? cub->sprite = get_texture(str, cub) : 0;
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
-	str[0] == '1' ? get_map(str, cub) : 0;
+	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
 }
 
 void	ft_parse(cub_t *cub, char *path)
