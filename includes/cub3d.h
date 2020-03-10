@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/04 18:18:30 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/10 16:25:43 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,9 @@ typedef struct	cub_s
 	char 		**map;
 	int			sol;
 	int			plafond;
-	double		p_x;
-	double		p_y;
-	double		d_x;
-	double		d_y;
-	double		m_x;
-	double		m_y;
+	coord_dbl_t	pos;
+	coord_dbl_t	plane;
+	coord_dbl_t	dir;
 }				cub_t;
 
 typedef struct	raycast_s

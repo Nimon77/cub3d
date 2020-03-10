@@ -34,11 +34,13 @@ int		ft_move(int keycode, cub_t *cub)
 	keycode == 0 ? go_left(cub) : 0;
 	keycode == 2 ? go_right(cub) : 0;
 	keycode == 12 || keycode == 53 ? quit(cub) : 0;
+	ft_actual(cub);
 	return (0);
 }
 
 int 	ft_actual(cub_t * cub)
 {
+	
 	mlx_loop(cub->m_ptr);
 	return (0);
 }

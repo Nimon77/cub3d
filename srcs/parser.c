@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/04 17:58:49 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/10 16:25:02 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,13 @@ void	get_pose(char **map, cub_t *cub)
 		y = 0;
 		while (map[x][y])
 		{
-			if (ft_isalpha(map[x][y]) && cub->p_x != -1 && cub->p_y != -1)
+			if (ft_isalpha(map[x][y]) && cub->pos.x != -1 && cub->pos.y != -1)
 				ft_error(3);
 			if ((map[x][y] == 'N' || map[x][y] == 'E' || map[x][y] == 'S' ||
-					map[x][y] == 'W') && cub->p_x == -1 && cub->p_y == -1)
+					map[x][y] == 'W') && cub->pos.x == -1 && cub->pos.y == -1)
 			{
-				cub->p_x = x;
-				cub->p_y = y;
-				cub->m_x = cub->p_x;
-				cub->m_y = cub->p_y;
+				cub->pos.x = x;
+				cub->pos.y = y;
 				cub->map[x][y] = '0';
 			}
 			y++;
