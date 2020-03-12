@@ -6,89 +6,92 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/10 16:25:43 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/12 17:15:52 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include	<stdio.h>
-#include	<math.h>
-#include	<fcntl.h>
+# include <stdio.h>
+# include <math.h>
+# include <fcntl.h>
 
-#include	"libft.h"
-#include	"mlx.h"
+# include "libft.h"
+# include "mlx.h"
 
-typedef struct	color_s
+typedef struct	s_color
 {
-	int			R;
-	int			V;
-	int			B;
-}				color_t;
+	int			r;
+	int			v;
+	int			b;
+}				t_color;
 
-typedef struct	image_s
+typedef struct	s_image
 {
 	void		*img;
 	int			wdt;
 	int			height;
-}				image_t;
+}				t_image;
 
-typedef struct	coord_dbl_s
+typedef struct	s_coord_dbl
 {
 	double	x;
 	double	y;
-}				coord_dbl_t;
+}				t_coord_dbl;
 
-typedef struct	coord_int_s
+typedef struct	s_coord_int
 {
 	int			x;
-	int 		y;
-}				coord_int_t;
+	int			y;
+}				t_coord_int;
 
-typedef struct	cub_s
+typedef struct	s_cub
 {
 	void		*m_ptr;
 	void		*m_win;
-	int			width;
-	int			height;
-	image_t		*NO;
-	image_t		*EA;
-	image_t		*SO;
-	image_t		*WE;
-	image_t		*sprite;
-	char 		**map;
+	struct
+	{
+		int		w;
+		int		h;
+	}			win;
+	t_image		*no;
+	t_image		*ea;
+	t_image		*so;
+	t_image		*we;
+	t_image		*sprite;
+	char		**map;
 	int			sol;
 	int			plafond;
-	coord_dbl_t	pos;
-	coord_dbl_t	plane;
-	coord_dbl_t	dir;
-}				cub_t;
+	t_coord_dbl	pos;
+	t_coord_dbl	plane;
+	t_coord_dbl	dir;
+}				t_cub;
 
-typedef struct	raycast_s
+typedef struct	s_raycast
 {
 	int			x;
-	coord_int_t	map;
-	coord_dbl_t	ray;
-	coord_dbl_t	delta;
-	coord_dbl_t	side;
-	coord_int_t	step;
-	double		WallDist;
+	t_coord_int	map;
+	t_coord_dbl	ray;
+	t_coord_dbl	delta;
+	t_coord_dbl	side;
+	t_coord_int	step;
+	double		walldist;
 	double		camera;
-	int 		hit;
-}				raycast_t;
+	int			hit;
+}				t_raycast;
 
-int				quit(cub_t *cub);
+int				quit(t_cub *cub);
 void			ft_error(int error);
 void			ft_free_matrice(char **str);
-void			ft_parse(cub_t *cub, char *path);
-void			put_color(int color, cub_t *cub);
-int 			ft_actual(cub_t * cub);
-int 			raycast(cub_t *cub);
-void			go_up(cub_t *cub);
-void			go_down(cub_t *cub);
-void			go_left(cub_t *cub);
-void			go_right(cub_t *cub);
-int				ft_move(int keycode, cub_t *cub);
+void			ft_parse(t_cub *cub, char *path);
+void			put_color(int color, t_cub *cub);
+int				ft_actual(t_cub *cub);
+int				raycast(t_cub *cub);
+void			go_up(t_cub *cub);
+void			go_down(t_cub *cub);
+void			go_left(t_cub *cub);
+void			go_right(t_cub *cub);
+int				ft_move(int keycode, t_cub *cub);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	go_up(cub_t *cub)
+void	go_up(t_cub *cub)
 {
 	int moveSpeed = 5;
 	
@@ -25,7 +25,7 @@ void	go_up(cub_t *cub)
 	raycast(cub);
 }
 
-void	go_down(cub_t *cub)
+void	go_down(t_cub *cub)
 {
 	int moveSpeed = 5;
 	
@@ -38,7 +38,7 @@ void	go_down(cub_t *cub)
 	raycast(cub);
 }
 
-void	go_left(cub_t *cub)
+void	go_left(t_cub *cub)
 {
 	double old_d_x = cub->dir.x;
 	double old_p_x = cub->plane.x;
@@ -52,7 +52,7 @@ void	go_left(cub_t *cub)
 	raycast(cub);
 }
 
-void	go_right(cub_t *cub)
+void	go_right(t_cub *cub)
 {
 	double	old_d_x = cub->dir.x;
 	double	old_p_x = cub->plane.x;

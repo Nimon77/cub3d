@@ -6,13 +6,13 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/10 16:25:02 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/12 17:11:41 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_size(char *str, cub_t *cub)
+void	get_size(char *str, t_cub *cub)
 {
 	int	i;
 	
@@ -21,21 +21,21 @@ void	get_size(char *str, cub_t *cub)
 	{
 		if (ft_isdigit(str[i]))
 		{
-			cub->width == 0 ? cub->width = ft_atoi(&str[i]) : 0;
+			cub->win.w == 0 ? cub->win.w = ft_atoi(&str[i]) : 0;
 			while (str[i] != ' ' && str[i] != '\0')
 				i++;
-			cub->height == 0 ? cub->height = ft_atoi(&str[i]) : 0;
+			cub->win.h == 0 ? cub->win.h = ft_atoi(&str[i]) : 0;
 		}
 		else
 			i++;
 	}
 }
 
-image_t	*get_texture(char *str, cub_t *cub)
+t_image	*get_texture(char *str, t_cub *cub)
 {
 	int	i;
 	int j;
-	image_t *img;
+	t_image *img;
 	char pth[256];
 	
 	i = 2;
@@ -61,7 +61,7 @@ void	ft_free_matrice(char **str)
 	free(str);
 }
 
-void	get_map(char *str, cub_t *cub)
+void	get_map(char *str, t_cub *cub)
 {
 	int 	i[2];
 	char	**tmp;
@@ -83,44 +83,44 @@ void	get_map(char *str, cub_t *cub)
 int		get_color(char *str)
 {
 	int		i;
-	color_t	rvb;
+	t_color	rvb;
 	
 	i = 2;
 	while (str[i] == ' ' && str[i])
 		i++;
-	rvb.R = -1;
-	rvb.V = -1;
-	rvb.B = -1;
+	rvb.r = -1;
+	rvb.v = -1;
+	rvb.b = -1;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.R == -1 &&
+		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.r == -1 &&
 				!ft_isdigit(str[i - 1]))
-			rvb.R = ft_atoi(&str[i]);
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.V == -1 &&
-				rvb.R != -1)
-			rvb.R > -1 ? rvb.V = ft_atoi(&str[i]) : 0;
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.B == -1 &&
-				rvb.R != -1 && rvb.V != -1)
-			rvb.R > -1 && rvb.V > -1 ? rvb.B = ft_atoi(&str[i]) : 0;
+			rvb.r = ft_atoi(&str[i]);
+		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.v == -1 &&
+				rvb.r != -1)
+			rvb.r > -1 ? rvb.v = ft_atoi(&str[i]) : 0;
+		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.b == -1 &&
+				rvb.r != -1 && rvb.v != -1)
+			rvb.r > -1 && rvb.v > -1 ? rvb.b = ft_atoi(&str[i]) : 0;
 		i++;
 	}
-	if (rvb.R < 0 || rvb.V < 0 || rvb.B < 0 || rvb.R > 255 || rvb.V > 255 ||
-	        rvb.B > 255)
+	if (rvb.r < 0 || rvb.v < 0 || rvb.b < 0 || rvb.r > 255 || rvb.v > 255 ||
+	        rvb.b > 255)
 		return (-1);
-	return ((rvb.R * 256 * 256) + (rvb.V * 256) + (rvb.B));
+	return ((rvb.r * 256 * 256) + (rvb.v * 256) + (rvb.b));
 }
 
-int		check_error(cub_t *cub)
+int		check_error(t_cub *cub)
 {
-	if (cub->NO == NULL || cub->EA == NULL || cub->SO == NULL ||
-			cub->WE == NULL || cub->sprite == NULL || cub->map == NULL)
+	if (cub->no == NULL || cub->ea == NULL || cub->so == NULL ||
+			cub->we == NULL || cub->sprite == NULL || cub->map == NULL)
 		ft_error(1);
 	if (cub->sol == -1 || cub->plafond == -1)
 		ft_error(2);
 	return (0);
 }
 
-void	get_pose(char **map, cub_t *cub)
+void	get_pose(char **map, t_cub *cub)
 {
 	int x;
 	int y;
@@ -146,20 +146,20 @@ void	get_pose(char **map, cub_t *cub)
 	}
 }
 
-void 	ft_select(char *str, cub_t *cub)
+void 	ft_select(char *str, t_cub *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
-	str[0] == 'N' && str[1] == 'O' ? cub->NO = get_texture(str, cub) : 0;
-	str[0] == 'S' && str[1] == 'O' ? cub->SO = get_texture(str, cub) : 0;
-	str[0] == 'W' && str[1] == 'E' ? cub->WE = get_texture(str, cub) : 0;
-	str[0] == 'E' && str[1] == 'A' ? cub->EA = get_texture(str, cub) : 0;
+	str[0] == 'N' && str[1] == 'O' ? cub->no = get_texture(str, cub) : 0;
+	str[0] == 'S' && str[1] == 'O' ? cub->so = get_texture(str, cub) : 0;
+	str[0] == 'W' && str[1] == 'E' ? cub->we = get_texture(str, cub) : 0;
+	str[0] == 'E' && str[1] == 'A' ? cub->ea = get_texture(str, cub) : 0;
 	str[0] == 'S' && str[1] == ' ' ? cub->sprite = get_texture(str, cub) : 0;
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
 }
 
-void	ft_parse(cub_t *cub, char *path)
+void	ft_parse(t_cub *cub, char *path)
 {
 	int		fd;
 	char	*str;

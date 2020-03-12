@@ -6,15 +6,15 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/10 16:54:06 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/03/12 17:11:41 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_raycast(raycast_t *raycst, cub_t *cub)
+void	init_raycast(t_raycast *raycst, t_cub *cub)
 {
-	raycst->camera = 2 * raycst->x / (double)cub->width - 1;
+	raycst->camera = 2 * raycst->x / (double)cub->win.w - 1;
 	raycst->ray.x = cub->dir.x + cub->plane.x * raycst->camera;
 	raycst->ray.y = cub->dir.y + cub->plane.y * raycst->camera;
 	raycst->map.x = (int)cub->plane.x;
@@ -26,13 +26,13 @@ void	init_raycast(raycast_t *raycst, cub_t *cub)
 	raycst->hit = 0;
 }
 
-int 	raycast(cub_t *cub)
+int 	raycast(t_cub *cub)
 {
-	raycast_t	raycst;
+	t_raycast	raycst;
 	
 	raycst.x = 0;
 	mlx_clear_window(cub->m_ptr, cub->m_win);
-	while (raycst.x < cub->width)
+	while (raycst.x < cub->win.w)
 	{
 		init_raycast(&raycst, cub);
 

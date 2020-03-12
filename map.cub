@@ -1,4 +1,4 @@
-R 300 300
+R 1280 720
 
 NO ./images/grass.png
 SO ./images/cobblestone.png
