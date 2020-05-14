@@ -92,6 +92,7 @@ void			go_up(t_cub *cub);
 void			go_down(t_cub *cub);
 void			go_left(t_cub *cub);
 void			go_right(t_cub *cub);
+void 			check_map(t_cub *cub);
 int				ft_move(int keycode, t_cub *cub);
 
 #endif

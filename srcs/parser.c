@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/12 17:11:41 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/04/28 17:53:21 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ t_image	*get_texture(char *str, t_cub *cub)
 		i++;
 	while (str[i] != ' ' && str[i])
 		pth[j++] = str[i++];
-	img = malloc(sizeof(*img));
-	img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->wdt, &img->height);
+	if ((img = malloc(sizeof(*img))) == NULL)
+		return NULL;
+	//img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->wdt,
+	// &img->height);
 	return (img);
 }
 
@@ -117,6 +119,7 @@ int		check_error(t_cub *cub)
 		ft_error(1);
 	if (cub->sol == -1 || cub->plafond == -1)
 		ft_error(2);
+	check_map(cub);
 	return (0);
 }
 
