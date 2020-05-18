@@ -87,6 +87,7 @@ void			ft_free_matrice(char **str);
 void			ft_parse(t_cub *cub, char *path);
 void			put_color(int color, t_cub *cub);
 int				ft_actual(t_cub *cub);
+int				get_color(char *str);
 int				raycast(t_cub *cub);
 void			go_up(t_cub *cub);
 void			go_down(t_cub *cub);

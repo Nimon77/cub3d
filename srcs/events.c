@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/03/12 17:16:57 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/18 17:02:59 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ int		ft_move(int keycode, t_cub *cub)
 	keycode == 0 ? go_left(cub) : 0;
 	keycode == 2 ? go_right(cub) : 0;
 	keycode == 12 || keycode == 53 ? quit(cub) : 0;
-	ft_actual(cub);
-	return (0);
-}
-
-int 	ft_actual(t_cub * cub)
-{
-	
-	mlx_loop(cub->m_ptr);
+	raycast(cub);
 	return (0);
 }
