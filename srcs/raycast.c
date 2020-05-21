@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/18 16:50:36 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/21 17:31:35 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,42 @@ void	init_raycast(t_raycast *raycst, t_cub *cub)
 	raycst->hit = 0;
 }
 
-int 	raycast(t_cub *cub)
+
+void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
 {
-	mlx_clear_window(cub->m_ptr, cub->m_win);
-	for(int x = 0; x < cub->win.w; x++)
+	int i;
+	
+	i = 0;
+	while (i < drawStart)
+	{
+		m->img.addr[i * m->cub.win.w + x] = m->cub.plafond;
+		i++;
+	}
+	while (i < drawEnd)
+	{
+		m->img.addr[i * m->cub.win.w + x] = color;
+		i++;
+	}
+	while (i < m->cub.win.h)
+	{
+		m->img.addr[i * m->cub.win.w + x] = m->cub.sol;
+		i++;
+	}
+}
+
+int 	raycast(t_index *m)
+{
+	//mlx_clear_window(m->cub.m_ptr, m->cub.m_win);
+	for(int x = 0; x < m->cub.win.w; x++)
 	{
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)cub->win.w - 1; //x-coordinate in
+		double cameraX = 2 * x / (double)m->cub.win.w - 1; //x-coordinate in
 		// camera space
-		double rayDirX = cub->dir.x + cub->plane.x * cameraX;
-		double rayDirY = cub->dir.y + cub->plane.y * cameraX;
+		double rayDirX = m->cub.dir.x + m->cub.plane.x * cameraX;
+		double rayDirY = m->cub.dir.y + m->cub.plane.y * cameraX;
 		//which box of the map we're in
-		int mapX = (int)cub->pos.x;
-		int mapY = (int)cub->pos.y;
+		int mapX = (int)m->cub.pos.x;
+		int mapY = (int)m->cub.pos.y;
 		
 		//length of ray from current position to next x or y-side
 		double sideDistX;
@@ -59,22 +82,22 @@ int 	raycast(t_cub *cub)
 		if(rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (cub->pos.x - mapX) * deltaDistX;
+			sideDistX = (m->cub.pos.x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - cub->pos.x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - m->cub.pos.x) * deltaDistX;
 		}
 		if(rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (cub->pos.y - mapY) * deltaDistY;
+			sideDistY = (m->cub.pos.y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - cub->pos.y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - m->cub.pos.y) * deltaDistY;
 		}
 		//perform DDA
 		while (hit == 0)
@@ -93,27 +116,27 @@ int 	raycast(t_cub *cub)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(cub->map[mapX][mapY] > '0') hit = 1;
+			if(m->cub.map[mapX][mapY] != '0') hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		if (side == 0)
-			perpWallDist = (mapX - cub->pos.x + (1 - stepX) / 2) / rayDirX;
+			perpWallDist = (mapX - m->cub.pos.x + (1 - stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (mapY - cub->pos.y + (1 - stepY) / 2) / rayDirY;
+			perpWallDist = (mapY - m->cub.pos.y + (1 - stepY) / 2) / rayDirY;
 		
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(cub->win.h / perpWallDist);
-		//int lineHeight = (int)(cub->win.h / 0.3);
+		int lineHeight = (int)(m->cub.win.h / perpWallDist);
+		//int lineHeight = (int)(m->cub->win.h / 0.3);
 		
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + cub->win.h / 2;
+		int drawStart = -lineHeight / 2 + m->cub.win.h / 2;
 		if(drawStart < 0)drawStart = 0;
-		int drawEnd = lineHeight / 2 + cub->win.h / 2;
-		if(drawEnd >= cub->win.h)drawEnd = cub->win.h - 1;
+		int drawEnd = lineHeight / 2 + m->cub.win.h / 2;
+		if(drawEnd >= m->cub.win.h)drawEnd = m->cub.win.h - 1;
 		
 		//choose wall color
 		int color;
-		switch(cub->map[mapX][mapY])
+		switch(m->cub.map[mapX][mapY])
 		{
 			case '1':
 				color = 16711680;
@@ -136,11 +159,9 @@ int 	raycast(t_cub *cub)
 		if(side == 1) {color = color / 2;}
 		
 		//draw the pixels of the stripe as a vertical line
-		for (int i = drawStart; i < drawEnd; i++)
-		{
-			mlx_pixel_put(cub->m_ptr, cub->m_win, x, i, color);
-			//printf("x : %d, i : %d, color : %d", x, i, color);
-		}
+		
+		write_img(m, drawStart, drawEnd, x, color);
 		//mlx_pixel_put(x, drawStart, drawEnd, color);
 	}
+	mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
 }

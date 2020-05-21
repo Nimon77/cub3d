@@ -26,14 +26,14 @@ int		quit(t_cub *cub)
 	exit(0);
 }
 
-int		ft_move(int keycode, t_cub *cub)
+int		ft_move(int keycode, t_index *m)
 {
 	printf("%d\n", keycode);
-	keycode == 13 ? go_up(cub) : 0;
-	keycode == 1 ? go_down(cub) : 0;
-	keycode == 0 ? go_left(cub) : 0;
-	keycode == 2 ? go_right(cub) : 0;
-	keycode == 12 || keycode == 53 ? quit(cub) : 0;
-	raycast(cub);
+	keycode == 13 ? go_up(&m->cub) : 0;
+	keycode == 1 ? go_down(&m->cub) : 0;
+	keycode == 0 ? go_left(&m->cub) : 0;
+	keycode == 2 ? go_right(&m->cub) : 0;
+	keycode == 12 || keycode == 53 ? quit(&m->cub) : 0;
+	raycast(m);
 	return (0);
 }
