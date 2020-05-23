@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/21 17:30:56 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/23 16:24:52 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 
 # include "libft.h"
 # include "mlx.h"
+
+# define PRESS_EVENT 2
+# define PRESS_MASK 1
+# define RELEASE_EVENT 3
+# define RELEASE_MASK 2
 
 typedef struct	s_color
 {
@@ -39,12 +44,6 @@ typedef struct	s_coord_dbl
 	double	x;
 	double	y;
 }				t_coord_dbl;
-
-typedef struct	s_coord_int
-{
-	int			x;
-	int			y;
-}				t_coord_int;
 
 typedef struct	s_cub
 {
@@ -68,19 +67,6 @@ typedef struct	s_cub
 	t_coord_dbl	dir;
 }				t_cub;
 
-typedef struct	s_raycast
-{
-	int			x;
-	t_coord_int	map;
-	t_coord_dbl	ray;
-	t_coord_dbl	delta;
-	t_coord_dbl	side;
-	t_coord_int	step;
-	double		walldist;
-	double		camera;
-	int			hit;
-}				t_raycast;
-
 typedef struct	s_image
 {
 	void	*img;
@@ -90,10 +76,24 @@ typedef struct	s_image
 	int		endian;
 }				t_image;
 
+typedef struct	s_move
+{
+	int			esc;
+	int			foward;
+	int			back;
+	int			left;
+	int			right;
+	int			turn_left;
+	int			turn_right;
+	int			sprint;
+	int			texture;
+}				t_move;
+
 typedef struct	s_index
 {
 	t_image		img;
 	t_cub		cub;
+	t_move		move;
 }				t_index;
 
 int				quit(t_cub *cub);
@@ -104,11 +104,12 @@ void			put_color(int color, t_cub *cub);
 int				ft_actual(t_cub *cub);
 int				get_color(char *str);
 int				raycast(t_index *m);
-void			go_up(t_cub *cub);
-void			go_down(t_cub *cub);
-void			go_left(t_cub *cub);
-void			go_right(t_cub *cub);
+void			go_up_down(t_cub *cub, int direction);
+void			go_left_right(t_cub *cub, int direction);
+void			go_turn_left_right(t_cub *cub, int direction);
 void 			check_map(t_cub *cub);
-int				ft_move(int keycode, t_index *m);
+int				ft_move(t_index *m);
+int				ft_release(int keycode, t_move *move);
+int				ft_press(int keycode, t_move *move);
 
 #endif

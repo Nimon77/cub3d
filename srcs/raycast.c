@@ -6,26 +6,11 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/21 18:12:30 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/23 17:51:23 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_raycast(t_raycast *raycst, t_cub *cub)
-{
-	raycst->camera = 2 * raycst->x / (double)cub->win.w - 1;
-	raycst->ray.x = cub->dir.x + cub->plane.x * raycst->camera;
-	raycst->ray.y = cub->dir.y + cub->plane.y * raycst->camera;
-	raycst->map.x = (int)cub->plane.x;
-	raycst->map.y = (int)cub->plane.y;
-	raycst->delta.x = sqrt(1 + (raycst->ray.y * raycst->ray.y) / (raycst->ray.x
-			* raycst->ray.x));
-	raycst->delta.y = sqrt(1 + (raycst->ray.x * raycst->ray.x) / (raycst->ray.y
-			* raycst->ray.y));
-	raycst->hit = 0;
-}
-
 
 void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
 {
@@ -163,5 +148,5 @@ int 	raycast(t_index *m)
 		write_img(m, drawStart, drawEnd, x, color);
 		//mlx_pixel_put(x, drawStart, drawEnd, color);
 	}
-	mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
+	//mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
 }

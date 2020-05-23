@@ -18,11 +18,12 @@ set(HALIDE_DISTRIB_USE_STATIC_LIBRARY TRUE)
 
 include_directories(includes)
 include_directories(libft)
-#include_directories(mlx)
+#include_directories(minilibX)
 
 file(GLOB SRCS "srcs/*.c")
 file(GLOB LIBFT "libft/*.c")
-file(GLOB MLX "/usr/local/lib/libmlx.dylib")
+file(GLOB MLX "mlx/libmlx.a")
+#file(GLOB MLX "/usr/local/lib/libmlx.dylib")
 
 add_executable(cub3d ${SRCS} ${LIBFT})
 

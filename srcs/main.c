@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/21 17:30:56 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/23 18:40:16 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,12 @@ void aff_map(char **map)
 		printf("%s\n", map[i++]);
 }
 
-void	put_color(int color, t_cub *cub)
+int	loop(t_index *m)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	while (i < cub->win.w)
-	{
-		j = 0;
-		while (j < cub->win.h)
-			mlx_pixel_put(cub->m_ptr, cub->m_win, i, j++, color);
-		i++;
-	}
+	raycast(m);
+	ft_move(m);
+	mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -71,14 +64,14 @@ int	main(int argc, char **argv)
 	{
 		if (init(&m, argv[1]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		//aff_map(cub.map);
 		m.cub.m_win = mlx_new_window(m.cub.m_ptr, m.cub.win.w, m.cub.win.h,
 				"cub3d");
-		//put_color(cub.sol, &cub);
-		mlx_key_hook(m.cub.m_win, &ft_move, &m);
-		mlx_hook(m.cub.m_win, 17, 17, &quit, &m.cub);
-		//mlx_loop_hook(cub.m_ptr, &raycast, &cub);
-		raycast(&m);
+		mlx_do_key_autorepeaton(m.cub.m_ptr);
+		mlx_hook(m.cub.m_win, PRESS_EVENT, PRESS_MASK, ft_press, &m.move);
+		mlx_hook(m.cub.m_win, RELEASE_EVENT, RELEASE_MASK, ft_release, &m
+		.move);
+		mlx_hook(m.cub.m_win, 17, 0, &quit, &m.cub);
+		mlx_loop_hook(m.cub.m_ptr, &loop, &m);
 		mlx_loop(m.cub.m_ptr);
 		quit(&m.cub);
 	}

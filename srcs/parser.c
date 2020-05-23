@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/04/28 17:53:21 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/23 18:52:25 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,38 @@ int		check_error(t_cub *cub)
 	return (0);
 }
 
+void	calc_dir(t_cub *cub, char c)
+{
+	if (c == 'N')
+	{
+		cub->dir.x = -1;
+		cub->dir.y = 0;
+		cub->plane.x = 0;
+		cub->plane.y = 0.66;
+	}
+	else if (c == 'S')
+	{
+		cub->dir.x = 1;
+		cub->dir.y = 0;
+		cub->plane.x = 0;
+		cub->plane.y = -0.66;
+	}
+	else if (c == 'W')
+	{
+		cub->dir.x = 0;
+		cub->dir.y = -1;
+		cub->plane.x = -0.66;
+		cub->plane.y = 0;
+	}
+	else if (c == 'E')
+	{
+		cub->dir.x = 0;
+		cub->dir.y = 1;
+		cub->plane.x = 0.66;
+		cub->plane.y = 0;
+	}
+}
+
 void	get_pose(char **map, t_cub *cub)
 {
 	int x;
@@ -139,8 +171,9 @@ void	get_pose(char **map, t_cub *cub)
 			if ((map[x][y] == 'N' || map[x][y] == 'E' || map[x][y] == 'S' ||
 					map[x][y] == 'W') && cub->pos.x == -1 && cub->pos.y == -1)
 			{
-				cub->pos.x = x;
-				cub->pos.y = y;
+				cub->pos.x = x + 0.5;
+				cub->pos.y = y + 0.5;
+				calc_dir(cub, map[x][y]);
 				cub->map[x][y] = '0';
 			}
 			y++;
