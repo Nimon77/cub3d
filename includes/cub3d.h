@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/23 16:24:52 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/25 17:16:50 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct	s_cub
 	t_tex		*ea;
 	t_tex		*so;
 	t_tex		*we;
-	t_tex		*sprite;
+	t_tex		*spr;
 	char		**map;
 	int			sol;
 	int			plafond;
@@ -89,11 +89,33 @@ typedef struct	s_move
 	int			texture;
 }				t_move;
 
+typedef struct s_raycast
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+}				t_raycast;
+
 typedef struct	s_index
 {
 	t_image		img;
 	t_cub		cub;
 	t_move		move;
+	t_raycast	ray;
 }				t_index;
 
 int				quit(t_cub *cub);

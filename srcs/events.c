@@ -20,7 +20,7 @@ int	quit(t_cub *cub)
 	mlx_destroy_image(cub->m_ptr, cub->ea->img);
 	mlx_destroy_image(cub->m_ptr, cub->so->img);
 	mlx_destroy_image(cub->m_ptr, cub->we->img);
-	mlx_destroy_image(cub->m_ptr, cub->sprite->img);
+	mlx_destroy_image(cub->m_ptr, cub->spr->img);
 	ft_free_matrice(cub->map);
 	//system("leaks cub3d");
 	exit(0);

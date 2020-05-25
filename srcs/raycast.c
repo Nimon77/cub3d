@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/23 17:51:23 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/25 18:21:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,119 +34,121 @@ void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
 	}
 }
 
+void	init_raycast(t_index *m, int x)
+{
+	m->ray.cameraX = 2 * x / (double)m->cub.win.w - 1;
+	m->ray.rayDirX = m->cub.dir.x + m->cub.plane.x * m->ray.cameraX;
+	m->ray.rayDirY = m->cub.dir.y + m->cub.plane.y * m->ray.cameraX;
+	m->ray.mapX = (int)m->cub.pos.x;
+	m->ray.mapY = (int)m->cub.pos.y;
+	m->ray.deltaDistX = ABS(1 / m->ray.rayDirX);
+	m->ray.deltaDistY = ABS(1 / m->ray.rayDirY);
+	m->ray.hit = 0;
+}
+
+void	calc_step_dist(t_index *m)
+{
+	if (m->ray.rayDirX < 0)
+	{
+		m->ray.stepX = -1;
+		m->ray.sideDistX = (m->cub.pos.x - m->ray.mapX) * m->ray.deltaDistX;
+	}
+	else
+	{
+		m->ray.stepX = 1;
+		m->ray.sideDistX = (m->ray.mapX + 1.0 - m->cub.pos.x) *
+						   m->ray.deltaDistX;
+	}
+	if (m->ray.rayDirY < 0)
+	{
+		m->ray.stepY = -1;
+		m->ray.sideDistY = (m->cub.pos.y - m->ray.mapY) * m->ray.deltaDistY;
+	}
+	else
+	{
+		m->ray.stepY = 1;
+		m->ray.sideDistY = (m->ray.mapY + 1.0 - m->cub.pos.y) *
+				m->ray.deltaDistY;
+	}
+}
+
+void	dda(t_index *m)
+{
+	while (m->ray.hit == 0)
+	{
+		if (m->ray.sideDistX < m->ray.sideDistY)
+		{
+			m->ray.sideDistX += m->ray.deltaDistX;
+			m->ray.mapX += m->ray.stepX;
+			m->ray.side = 0;
+		}
+		else
+		{
+			m->ray.sideDistY += m->ray.deltaDistY;
+			m->ray.mapY += m->ray.stepY;
+			m->ray.side = 1;
+		}
+		if (m->cub.map[m->ray.mapX][m->ray.mapY] != '0')
+			m->ray.hit = 1;
+	}
+	if (m->ray.side == 0)
+		m->ray.perpWallDist = (m->ray.mapX - m->cub.pos.x +
+							   (1 - m->ray.stepX) / 2) / m->ray.rayDirX;
+	else
+		m->ray.perpWallDist = (m->ray.mapY - m->cub.pos.y +
+							   (1 - m->ray.stepY) / 2) / m->ray.rayDirY;
+}
+
+int		line_size(t_index *m)
+{
+	int	color;
+	
+	m->ray.lineHeight = (int)(m->cub.win.h / m->ray.perpWallDist);
+	m->ray.drawStart = -m->ray.lineHeight / 2 + m->cub.win.h / 2;
+	if (m->ray.drawStart < 0)
+		m->ray.drawStart = 0;
+	m->ray.drawEnd = m->ray.lineHeight / 2 + m->cub.win.h / 2;
+	if (m->ray.drawEnd >= m->cub.win.h)
+		m->ray.drawEnd = m->cub.win.h - 1;
+	switch (m->cub.map[m->ray.mapX][m->ray.mapY])
+	{
+		case '1':
+			color = 16711680;
+			break; //red
+		case '2':
+			color = 65280;
+			break; //green
+		case '3':
+			color = 255;
+			break; //blue
+		case '4':
+			color = 16777215;
+			break; //white
+		default:
+			color = 16776960;
+			break; //yellow
+	}
+	if (m->ray.side == 1)
+	{
+		color = color / 2;
+	}
+	return (color);
+}
+
 int 	raycast(t_index *m)
 {
 	//mlx_clear_window(m->cub.m_ptr, m->cub.m_win);
-	for(int x = 0; x < m->cub.win.w; x++)
+	int x;
+	int	color;
+	
+	x = 0;
+	while (x < m->cub.win.w)
 	{
-		//calculate ray position and direction
-		double cameraX = 2 * x / (double)m->cub.win.w - 1; //x-coordinate in
-		// camera space
-		double rayDirX = m->cub.dir.x + m->cub.plane.x * cameraX;
-		double rayDirY = m->cub.dir.y + m->cub.plane.y * cameraX;
-		//which box of the map we're in
-		int mapX = (int)m->cub.pos.x;
-		int mapY = (int)m->cub.pos.y;
-		
-		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
-		
-		//length of ray from one x or y-side to next x or y-side
-		double deltaDistX = ABS(1 / rayDirX);
-		double deltaDistY = ABS(1 / rayDirY);
-		double perpWallDist;
-		
-		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
-		
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
-		//calculate step and initial sideDist
-		if(rayDirX < 0)
-		{
-			stepX = -1;
-			sideDistX = (m->cub.pos.x - mapX) * deltaDistX;
-		}
-		else
-		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - m->cub.pos.x) * deltaDistX;
-		}
-		if(rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (m->cub.pos.y - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - m->cub.pos.y) * deltaDistY;
-		}
-		//perform DDA
-		while (hit == 0)
-		{
-			//jump to next map square, OR in x-direction, OR in y-direction
-			if(sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			//Check if ray has hit a wall
-			if(m->cub.map[mapX][mapY] != '0') hit = 1;
-		}
-		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		if (side == 0)
-			perpWallDist = (mapX - m->cub.pos.x + (1 - stepX) / 2) / rayDirX;
-		else
-			perpWallDist = (mapY - m->cub.pos.y + (1 - stepY) / 2) / rayDirY;
-		
-		//Calculate height of line to draw on screen
-		int lineHeight = (int)(m->cub.win.h / perpWallDist);
-		//int lineHeight = (int)(m->cub->win.h / 0.3);
-		
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + m->cub.win.h / 2;
-		if(drawStart < 0)drawStart = 0;
-		int drawEnd = lineHeight / 2 + m->cub.win.h / 2;
-		if(drawEnd >= m->cub.win.h)drawEnd = m->cub.win.h - 1;
-		
-		//choose wall color
-		int color;
-		switch(m->cub.map[mapX][mapY])
-		{
-			case '1':
-				color = 16711680;
-				break; //red
-			case '2':
-				color = 65280;
-				break; //green
-			case '3':
-				color = 255;
-				break; //blue
-			case '4':
-				color = 16777215;
-				break; //white
-			default:
-				color = 16776960;
-				break; //yellow
-		}
-		
-		//give x and y sides different brightness
-		if(side == 1) {color = color / 2;}
-		
-		//draw the pixels of the stripe as a vertical line
-		
-		write_img(m, drawStart, drawEnd, x, color);
-		//mlx_pixel_put(x, drawStart, drawEnd, color);
+		init_raycast(m, x);
+		calc_step_dist(m);
+		dda(m);
+		color = line_size(m);
+		write_img(m, m->ray.drawStart, m->ray.drawEnd, x, color);
+		x++;
 	}
-	//mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
 }

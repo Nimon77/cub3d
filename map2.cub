@@ -6,8 +6,8 @@ WE ./images/diamond_ore.png
 EA ./images/diamond_block.png
 
 S ./images/end_crystal.png
-F 220,10,00
-C 0,255,0
+F 88,41,0
+C 37,253,233
 
 111111111111111111111111
 100000000000000000000001

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/23 18:52:25 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/25 17:17:03 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		get_color(char *str)
 int		check_error(t_cub *cub)
 {
 	if (cub->no == NULL || cub->ea == NULL || cub->so == NULL ||
-			cub->we == NULL || cub->sprite == NULL || cub->map == NULL)
+			cub->we == NULL || cub->spr == NULL || cub->map == NULL)
 		ft_error(1);
 	if (cub->sol == -1 || cub->plafond == -1)
 		ft_error(2);
@@ -125,33 +125,29 @@ int		check_error(t_cub *cub)
 
 void	calc_dir(t_cub *cub, char c)
 {
+	cub->dir.x = 0;
+	cub->dir.y = 0;
+	cub->plane.x = 0;
+	cub->plane.y = 0;
 	if (c == 'N')
 	{
 		cub->dir.x = -1;
-		cub->dir.y = 0;
-		cub->plane.x = 0;
 		cub->plane.y = 0.66;
 	}
 	else if (c == 'S')
 	{
 		cub->dir.x = 1;
-		cub->dir.y = 0;
-		cub->plane.x = 0;
 		cub->plane.y = -0.66;
 	}
 	else if (c == 'W')
 	{
-		cub->dir.x = 0;
 		cub->dir.y = -1;
 		cub->plane.x = -0.66;
-		cub->plane.y = 0;
 	}
 	else if (c == 'E')
 	{
-		cub->dir.x = 0;
 		cub->dir.y = 1;
 		cub->plane.x = 0.66;
-		cub->plane.y = 0;
 	}
 }
 
@@ -189,7 +185,7 @@ void 	ft_select(char *str, t_cub *cub)
 	str[0] == 'S' && str[1] == 'O' ? cub->so = get_texture(str, cub) : 0;
 	str[0] == 'W' && str[1] == 'E' ? cub->we = get_texture(str, cub) : 0;
 	str[0] == 'E' && str[1] == 'A' ? cub->ea = get_texture(str, cub) : 0;
-	str[0] == 'S' && str[1] == ' ' ? cub->sprite = get_texture(str, cub) : 0;
+	str[0] == 'S' && str[1] == ' ' ? cub->spr = get_texture(str, cub) : 0;
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
