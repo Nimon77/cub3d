@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 15:04:07 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/26 17:15:26 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	calc_step_dist(t_index *m)
 		m->ray.sidedistx = (m->ray.mapx + 1.0 - m->cub.pos.x) *
 						   m->ray.deltadistx;
 	}
-	if (m->ray.raydirx < 0)
+	if (m->ray.raydiry < 0)
 	{
 		m->ray.stepy = -1;
 		m->ray.sidedisty = (m->cub.pos.y - m->ray.mapy) * m->ray.deltadisty;
@@ -74,7 +74,7 @@ void	dda(t_index *m)
 							   (1 - m->ray.stepx) / 2) / m->ray.raydirx;
 	else
 		m->ray.perpwalldist = (m->ray.mapy - m->cub.pos.y +
-							   (1 - m->ray.stepy) / 2) / m->ray.raydirx;
+							   (1 - m->ray.stepy) / 2) / m->ray.raydiry;
 }
 
 int		line_size(t_index *m)
@@ -116,21 +116,23 @@ int		line_size(t_index *m)
 void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
 {
 	int i;
+	int	j;
 	
 	i = 0;
+	j = (m->img.line_length / 4) - m->cub.win.w;
 	while (i < drawStart)
 	{
-		m->img.addr[i * m->cub.win.w + x] = m->cub.plafond;
+		m->img.addr[i * (m->cub.win.w + j) + x] = m->cub.plafond;
 		i++;
 	}
 	while (i < drawEnd)
 	{
-		m->img.addr[i * m->cub.win.w + x] = color;
+		m->img.addr[i * (m->cub.win.w + j) + x] = color;
 		i++;
 	}
 	while (i < m->cub.win.h)
 	{
-		m->img.addr[i * m->cub.win.w + x] = m->cub.sol;
+		m->img.addr[i * (m->cub.win.w + j) + x] = m->cub.sol;
 		i++;
 	}
 }

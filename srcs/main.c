@@ -6,15 +6,11 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 16:11:42 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/26 17:19:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include <stdio.h>
-#include <fcntl.h>
-
-#include "libft.h"
 #include "cub3d.h"
 
 int	init(t_index *m, char *arg)
@@ -64,11 +60,10 @@ int	main(int argc, char **argv)
 		if (init(&m, argv[1]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		m.cub.m_win = mlx_new_window(m.cub.m_ptr, m.cub.win.w, m.cub.win.h,
-				"cub3d");
+				"Cub3D");
 		mlx_do_key_autorepeaton(m.cub.m_ptr);
 		mlx_hook(m.cub.m_win, PRESS_EVENT, PRESS_MASK, ft_press, &m.move);
-		mlx_hook(m.cub.m_win, RELEASE_EVENT, RELEASE_MASK, ft_release, &m
-		.move);
+		mlx_hook(m.cub.m_win, RELEASE_EVENT, RELEASE_MASK, ft_release, &m.move);
 		mlx_hook(m.cub.m_win, 17, 0, &quit, &m.cub);
 		mlx_loop_hook(m.cub.m_ptr, &loop, &m);
 		mlx_loop(m.cub.m_ptr);

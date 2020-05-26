@@ -51,8 +51,10 @@ t_texture	*get_texture(char *str, t_cub *cub)
 	close(fd);
 	if ((img = malloc(sizeof(*img))) == NULL)
 		return NULL;
-//	img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->size.w,
-//	 	&img->size.h);
+	img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->size.w,
+	 	&img->size.h);
+	img->addr = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	return (img);
 }
 
