@@ -6,14 +6,13 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/23 18:40:16 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/26 16:11:42 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <stdio.h>
 #include <fcntl.h>
-#include <cub3d.h>
 
 #include "libft.h"
 #include "cub3d.h"

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/23 16:24:52 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/26 15:11:05 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	quit(t_cub *cub)
 	mlx_destroy_image(cub->m_ptr, cub->ea->img);
 	mlx_destroy_image(cub->m_ptr, cub->so->img);
 	mlx_destroy_image(cub->m_ptr, cub->we->img);
-	mlx_destroy_image(cub->m_ptr, cub->spr->img);
+	mlx_destroy_image(cub->m_ptr, cub->sprite->img);
 	ft_free_matrice(cub->map);
 	//system("leaks cub3d");
 	exit(0);
@@ -42,8 +42,6 @@ int	ft_release(int keycode, t_move *move)
 		move->turn_left = 0;
 	else if (keycode == 124)
 		move->turn_right = 0;
-	else if (keycode == 257)
-		move->sprint = 0;
 	return (0);
 }
 
@@ -63,12 +61,6 @@ int	ft_press(int keycode, t_move *move)
 		move->turn_left = 1;
 	else if (keycode == 124)
 		move->turn_right = 1;
-	else if (keycode == 257)
-		move->sprint = 1;
-	else if (keycode == 18)
-		move->texture = 1;
-	else if (keycode == 19)
-		move->texture = 0;
 	return (0);
 }
 

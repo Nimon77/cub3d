@@ -14,7 +14,7 @@
 
 void	go_up_down(t_cub *cub, int direction)
 {
-	float moveSpeed = 0.05;
+	float moveSpeed = MOVE_SPEED;
 	
 	if (direction == 0)
 	{
@@ -38,7 +38,7 @@ void	go_up_down(t_cub *cub, int direction)
 
 void	go_left_right(t_cub *cub, int direction)
 {
-	float	moveSpeed = 0.05;
+	float	moveSpeed = MOVE_SPEED;
 	
 	if (direction == 0)
 	{
@@ -64,7 +64,7 @@ void	go_turn_left_right(t_cub *cub, int direction)
 {
 	double old_d_x = cub->dir.x;
 	double old_p_x = cub->plane.x;
-	float rotSpeed = 0.03;
+	float rotSpeed = ROTATE_SPEED;
 	
 	if (direction == 0)
 	{

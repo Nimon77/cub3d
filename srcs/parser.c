@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/25 17:17:03 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/26 15:49:56 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ void	get_size(char *str, t_cub *cub)
 	}
 }
 
-t_image	*get_texture(char *str, t_cub *cub)
+t_texture	*get_texture(char *str, t_cub *cub)
 {
 	int	i;
 	int j;
-	t_image *img;
+	int fd;
+	t_texture *img;
 	char pth[256];
 	
 	i = 2;
@@ -45,10 +46,13 @@ t_image	*get_texture(char *str, t_cub *cub)
 		i++;
 	while (str[i] != ' ' && str[i])
 		pth[j++] = str[i++];
+	if ((fd = open(pth, O_RDONLY)) == -1)
+		return (NULL);
+	close(fd);
 	if ((img = malloc(sizeof(*img))) == NULL)
 		return NULL;
-	//img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->wdt,
-	// &img->height);
+//	img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->size.w,
+//	 	&img->size.h);
 	return (img);
 }
 
@@ -115,7 +119,7 @@ int		get_color(char *str)
 int		check_error(t_cub *cub)
 {
 	if (cub->no == NULL || cub->ea == NULL || cub->so == NULL ||
-			cub->we == NULL || cub->spr == NULL || cub->map == NULL)
+			cub->we == NULL || cub->sprite == NULL || cub->map == NULL)
 		ft_error(1);
 	if (cub->sol == -1 || cub->plafond == -1)
 		ft_error(2);
@@ -185,7 +189,7 @@ void 	ft_select(char *str, t_cub *cub)
 	str[0] == 'S' && str[1] == 'O' ? cub->so = get_texture(str, cub) : 0;
 	str[0] == 'W' && str[1] == 'E' ? cub->we = get_texture(str, cub) : 0;
 	str[0] == 'E' && str[1] == 'A' ? cub->ea = get_texture(str, cub) : 0;
-	str[0] == 'S' && str[1] == ' ' ? cub->spr = get_texture(str, cub) : 0;
+	str[0] == 'S' && str[1] == ' ' ? cub->sprite = get_texture(str, cub) : 0;
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
