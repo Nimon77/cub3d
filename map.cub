@@ -1,11 +1,11 @@
-R 900 900
+R 1280 720
 
-NO ./images/grass.png
-SO ./images/cobblestone.png
-WE ./images/diamond_ore.png
-EA ./images/diamond_block.png
+NO ./images/grass.xpm
+SO ./images/cobblestone.xpm
+WE ./images/diamond_ore.xpm
+EA ./images/diamond_block.xpm
 
-S ./images/end_crystal.png
+S ./images/end_crystal.xpm
 F 88,41,0
 C 37,253,233
 

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 17:19:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/29 17:48:16 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,12 @@ int	init(t_index *m, char *arg)
 	m->cub.dir.y = 0;
 	m->cub.plane.x = 0;
 	m->cub.plane.y = 0.66;
+	ft_move_init(m);
 	ft_parse(&m->cub, arg);
 	m->img.img = mlx_new_image(m->cub.m_ptr, m->cub.win.w, m->cub.win.h);
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
 										   &m->img.line_length, &m->img.endian);
 	return (0);
-}
-
-void aff_map(char **map)
-{
-	int		i;
-	
-	i = 0;
-	while (map[i][0] != '\0')
-		printf("%s\n", map[i++]);
 }
 
 int	loop(t_index *m)

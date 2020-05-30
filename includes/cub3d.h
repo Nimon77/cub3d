@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 15:37:02 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/30 23:02:20 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,12 @@ void			ft_free_matrice(char **str);
 void			ft_parse(t_cub *cub, char *path);
 int				get_color(char *str);
 int				raycast(t_index *m);
+void			ft_move_init(t_index *m);
 void			go_up_down(t_cub *cub, int direction);
 void			go_left_right(t_cub *cub, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
 void			check_map(t_cub *cub);
+int				color_wall(t_index *m, int i, int x, int j, int drawEnd);
 int				ft_move(t_index *m);
 int				ft_release(int keycode, t_move *move);
 int				ft_press(int keycode, t_move *move);

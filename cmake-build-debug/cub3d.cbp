@@ -226,6 +226,9 @@
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/srcs/events.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/nsimon/CLionProjects/cub3d/srcs/init.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/srcs/main.c">
 			<Option target="cub3d"/>
 		</Unit>
@@ -236,6 +239,9 @@
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/srcs/raycast.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/nsimon/CLionProjects/cub3d/srcs/wall_color.c">
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/nsimon/CLionProjects/cub3d/CMakeLists.txt">

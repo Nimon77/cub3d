@@ -6,13 +6,13 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 15:49:56 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/29 17:43:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_size(char *str, t_cub *cub)
+void		get_size(char *str, t_cub *cub)
 {
 	int	i;
 	
@@ -51,14 +51,14 @@ t_texture	*get_texture(char *str, t_cub *cub)
 	close(fd);
 	if ((img = malloc(sizeof(*img))) == NULL)
 		return NULL;
-	img->img = mlx_png_file_to_image(cub->m_ptr, pth, &img->size.w,
+	img->img = mlx_xpm_file_to_image(cub->m_ptr, pth, &img->size.w,
 	 	&img->size.h);
 	img->addr = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	return (img);
 }
 
-void	ft_free_matrice(char **str)
+void		ft_free_matrice(char **str)
 {
 	int		i;
 	
@@ -69,7 +69,7 @@ void	ft_free_matrice(char **str)
 	free(str);
 }
 
-void	get_map(char *str, t_cub *cub)
+void		get_map(char *str, t_cub *cub)
 {
 	int 	i[2];
 	char	**tmp;
@@ -88,7 +88,7 @@ void	get_map(char *str, t_cub *cub)
 	cub->map = tmp;
 }
 
-int		get_color(char *str)
+int			get_color(char *str)
 {
 	int		i;
 	t_color	rvb;
@@ -118,7 +118,7 @@ int		get_color(char *str)
 	return ((rvb.r * 256 * 256) + (rvb.v * 256) + (rvb.b));
 }
 
-int		check_error(t_cub *cub)
+int			check_error(t_cub *cub)
 {
 	if (cub->no == NULL || cub->ea == NULL || cub->so == NULL ||
 			cub->we == NULL || cub->sprite == NULL || cub->map == NULL)
@@ -129,7 +129,7 @@ int		check_error(t_cub *cub)
 	return (0);
 }
 
-void	calc_dir(t_cub *cub, char c)
+void		calc_dir(t_cub *cub, char c)
 {
 	cub->dir.x = 0;
 	cub->dir.y = 0;
@@ -157,7 +157,7 @@ void	calc_dir(t_cub *cub, char c)
 	}
 }
 
-void	get_pose(char **map, t_cub *cub)
+void		get_pose(char **map, t_cub *cub)
 {
 	int x;
 	int y;
@@ -184,7 +184,7 @@ void	get_pose(char **map, t_cub *cub)
 	}
 }
 
-void 	ft_select(char *str, t_cub *cub)
+void 		ft_select(char *str, t_cub *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
 	str[0] == 'N' && str[1] == 'O' ? cub->no = get_texture(str, cub) : 0;
@@ -197,7 +197,7 @@ void 	ft_select(char *str, t_cub *cub)
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
 }
 
-void	ft_parse(t_cub *cub, char *path)
+void		ft_parse(t_cub *cub, char *path)
 {
 	int		fd;
 	char	*str;

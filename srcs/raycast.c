@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 17:15:26 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/05/30 23:24:15 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ void	dda(t_index *m)
 							   (1 - m->ray.stepy) / 2) / m->ray.raydiry;
 }
 
-int		line_size(t_index *m)
+void	line_size(t_index *m)
 {
-	int	color;
-	
 	m->ray.lineheight = (int)(m->cub.win.h / m->ray.perpwalldist);
 	m->ray.drawstart = -m->ray.lineheight / 2 + m->cub.win.h / 2;
 	if (m->ray.drawstart < 0)
@@ -88,43 +86,23 @@ int		line_size(t_index *m)
 	m->ray.drawend = m->ray.lineheight / 2 + m->cub.win.h / 2;
 	if (m->ray.drawend >= m->cub.win.h)
 		m->ray.drawend = m->cub.win.h - 1;
-	switch (m->cub.map[m->ray.mapx][m->ray.mapy])
-	{
-		case '1':
-			color = 16711680;
-			break; //red
-		case '2':
-			color = 65280;
-			break; //green
-		case '3':
-			color = 255;
-			break; //blue
-		case '4':
-			color = 16777215;
-			break; //white
-		default:
-			color = 16776960;
-			break; //yellow
-	}
-	if (m->ray.side == 1)
-	{
-		color = color / 2;
-	}
-	return (color);
 }
 
-void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
+void	write_img(t_index *m, int drawStart, int drawEnd, int x)
 {
 	int i;
 	int	j;
+	int	color;
 	
 	i = 0;
 	j = (m->img.line_length / 4) - m->cub.win.w;
+	color = color_wall(m);
 	while (i < drawStart)
 	{
 		m->img.addr[i * (m->cub.win.w + j) + x] = m->cub.plafond;
 		i++;
 	}
+	i = color_wall(m, i, x, j, drawEnd);
 	while (i < drawEnd)
 	{
 		m->img.addr[i * (m->cub.win.w + j) + x] = color;
@@ -140,7 +118,6 @@ void	write_img(t_index *m, int drawStart, int drawEnd, int x, int color)
 int 	raycast(t_index *m)
 {
 	int x;
-	int	color;
 	
 	x = 0;
 	while (x < m->cub.win.w)
@@ -148,8 +125,8 @@ int 	raycast(t_index *m)
 		init_raycast(m, x);
 		calc_step_dist(m);
 		dda(m);
-		color = line_size(m);
-		write_img(m, m->ray.drawstart, m->ray.drawend, x, color);
+		line_size(m);
+		write_img(m, m->ray.drawstart, m->ray.drawend, x);
 		x++;
 	}
 	return (0);

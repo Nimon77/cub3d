@@ -1419,6 +1419,33 @@ srcs/events.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/events.c.s
 .PHONY : srcs/events.c.s
 
+srcs/init.o: srcs/init.c.o
+
+.PHONY : srcs/init.o
+
+# target to build an object file
+srcs/init.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/init.c.o
+.PHONY : srcs/init.c.o
+
+srcs/init.i: srcs/init.c.i
+
+.PHONY : srcs/init.i
+
+# target to preprocess a source file
+srcs/init.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/init.c.i
+.PHONY : srcs/init.c.i
+
+srcs/init.s: srcs/init.c.s
+
+.PHONY : srcs/init.s
+
+# target to generate assembly for a file
+srcs/init.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/init.c.s
+.PHONY : srcs/init.c.s
+
 srcs/main.o: srcs/main.c.o
 
 .PHONY : srcs/main.o
@@ -1526,6 +1553,33 @@ srcs/raycast.s: srcs/raycast.c.s
 srcs/raycast.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/raycast.c.s
 .PHONY : srcs/raycast.c.s
+
+srcs/wall_color.o: srcs/wall_color.c.o
+
+.PHONY : srcs/wall_color.o
+
+# target to build an object file
+srcs/wall_color.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_color.c.o
+.PHONY : srcs/wall_color.c.o
+
+srcs/wall_color.i: srcs/wall_color.c.i
+
+.PHONY : srcs/wall_color.i
+
+# target to preprocess a source file
+srcs/wall_color.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_color.c.i
+.PHONY : srcs/wall_color.c.i
+
+srcs/wall_color.s: srcs/wall_color.c.s
+
+.PHONY : srcs/wall_color.s
+
+# target to generate assembly for a file
+srcs/wall_color.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_color.c.s
+.PHONY : srcs/wall_color.c.s
 
 # Help Target
 help:
@@ -1680,6 +1734,9 @@ help:
 	@echo "... srcs/events.o"
 	@echo "... srcs/events.i"
 	@echo "... srcs/events.s"
+	@echo "... srcs/init.o"
+	@echo "... srcs/init.i"
+	@echo "... srcs/init.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
@@ -1692,6 +1749,9 @@ help:
 	@echo "... srcs/raycast.o"
 	@echo "... srcs/raycast.i"
 	@echo "... srcs/raycast.s"
+	@echo "... srcs/wall_color.o"
+	@echo "... srcs/wall_color.i"
+	@echo "... srcs/wall_color.s"
 .PHONY : help
 
 
