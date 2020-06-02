@@ -1581,6 +1581,33 @@ srcs/wall_color.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_color.c.s
 .PHONY : srcs/wall_color.c.s
 
+srcs/wall_textures.o: srcs/wall_textures.c.o
+
+.PHONY : srcs/wall_textures.o
+
+# target to build an object file
+srcs/wall_textures.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_textures.c.o
+.PHONY : srcs/wall_textures.c.o
+
+srcs/wall_textures.i: srcs/wall_textures.c.i
+
+.PHONY : srcs/wall_textures.i
+
+# target to preprocess a source file
+srcs/wall_textures.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_textures.c.i
+.PHONY : srcs/wall_textures.c.i
+
+srcs/wall_textures.s: srcs/wall_textures.c.s
+
+.PHONY : srcs/wall_textures.s
+
+# target to generate assembly for a file
+srcs/wall_textures.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/wall_textures.c.s
+.PHONY : srcs/wall_textures.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1752,6 +1779,9 @@ help:
 	@echo "... srcs/wall_color.o"
 	@echo "... srcs/wall_color.i"
 	@echo "... srcs/wall_color.s"
+	@echo "... srcs/wall_textures.o"
+	@echo "... srcs/wall_textures.i"
+	@echo "... srcs/wall_textures.s"
 .PHONY : help
 
 

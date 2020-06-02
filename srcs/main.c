@@ -32,6 +32,7 @@ int	init(t_index *m, char *arg)
 	m->img.img = mlx_new_image(m->cub.m_ptr, m->cub.win.w, m->cub.win.h);
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
 										   &m->img.line_length, &m->img.endian);
+	m->img.line_length /= 4;
 	return (0);
 }
 

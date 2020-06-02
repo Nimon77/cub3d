@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/30 23:02:20 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/02 16:22:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ typedef struct	s_raycast
 	int			lineheight;
 	int			drawstart;
 	int			drawend;
+	double		wallx;
+	int			texx;
 }				t_raycast;
 
 typedef struct	s_index
@@ -136,7 +138,8 @@ void			go_up_down(t_cub *cub, int direction);
 void			go_left_right(t_cub *cub, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
 void			check_map(t_cub *cub);
-int				color_wall(t_index *m, int i, int x, int j, int drawEnd);
+int				color_wall(t_index *m, int i, int x, int drawEnd);
+int				textures_wall(t_index *m, int i, int x, int drawEnd);
 int				ft_move(t_index *m);
 int				ft_release(int keycode, t_move *move);
 int				ft_press(int keycode, t_move *move);
