@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/02 17:45:11 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/03 17:59:28 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ void	line_size(t_index *m)
 	m->ray.drawend = m->ray.lineheight / 2 + m->cub.win.h / 2;
 	if (m->ray.drawend >= m->cub.win.h)
 		m->ray.drawend = m->cub.win.h - 1;
-	if (m->ray.side == 0)
-		m->ray.wallx = m->cub.pos.y + m->ray.perpwalldist * m->ray.raydiry;
-	else
-		m->ray.wallx = m->cub.pos.x + m->ray.perpwalldist + m->ray.raydirx;
-	m->ray.wallx -= floor(m->ray.wallx);
 }
 
 void	write_img(t_index *m, int drawstart, int drawend, int x)
@@ -103,7 +98,7 @@ void	write_img(t_index *m, int drawstart, int drawend, int x)
 		m->img.addr[i * m->img.line_length + x] = m->cub.plafond;
 		i++;
 	}
-	//i = color_wall(m, i, x, drawend);
+	/* i = color_wall(m, i, x, drawend); */
 	i = textures_wall(m, i, x, drawend);
 	while (i < m->cub.win.h)
 	{

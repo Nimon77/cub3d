@@ -6,23 +6,24 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 15:11:05 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/04 17:31:00 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	quit(t_cub *cub)
+int	quit(t_index *m)
 {
 	printf("quit\n");
-	mlx_destroy_window(cub->m_ptr, cub->m_win);
-	mlx_destroy_image(cub->m_ptr, cub->no->img);
-	mlx_destroy_image(cub->m_ptr, cub->ea->img);
-	mlx_destroy_image(cub->m_ptr, cub->so->img);
-	mlx_destroy_image(cub->m_ptr, cub->we->img);
-	mlx_destroy_image(cub->m_ptr, cub->sprite->img);
-	ft_free_matrice(cub->map);
-	//system("leaks cub3d");
+	mlx_destroy_window(m->cub.m_ptr, m->cub.m_win);
+	mlx_destroy_image(m->cub.m_ptr, m->cub.no->img);
+	mlx_destroy_image(m->cub.m_ptr, m->cub.ea->img);
+	mlx_destroy_image(m->cub.m_ptr, m->cub.so->img);
+	mlx_destroy_image(m->cub.m_ptr, m->cub.we->img);
+	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
+	mlx_destroy_image(m->cub.m_ptr, m->img.img);
+	ft_free_matrice(m->cub.map);
+	system("leaks cub3d");
 	exit(0);
 }
 
@@ -72,6 +73,6 @@ int	ft_move(t_index *m)
 	m->move.right == 1 ? go_left_right(&m->cub, 1) : 0;
 	m->move.turn_left == 1 ? go_turn_left_right(&m->cub, 0) : 0;
 	m->move.turn_right == 1 ? go_turn_left_right(&m->cub, 1) : 0;
-	m->move.esc == 1 ? quit(&m->cub) : 0;
+	m->move.esc == 1 ? quit(m) : 0;
 	return (0);
 }

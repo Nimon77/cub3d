@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/02 16:22:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/04 17:21:17 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ typedef struct	s_raycast
 	int			drawend;
 	double		wallx;
 	int			texx;
+	double		step;
+	double		texpos;
+	t_texture	*current;
 }				t_raycast;
 
 typedef struct	s_index
@@ -127,7 +130,7 @@ typedef struct	s_index
 	t_raycast	ray;
 }				t_index;
 
-int				quit(t_cub *cub);
+int				quit(t_index *m);
 void			ft_error(int error);
 void			ft_free_matrice(char **str);
 void			ft_parse(t_cub *cub, char *path);

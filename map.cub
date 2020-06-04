@@ -1,4 +1,4 @@
-R 900 900d
+R 1280 720
 
 NO ./images/grass.xpm
 SO ./images/cobblestone.xpm
