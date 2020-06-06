@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/03 17:59:28 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/06 16:44:28 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	dda(t_index *m)
 			m->ray.mapy += m->ray.stepy;
 			m->ray.side = 1;
 		}
-		if (m->cub.map[m->ray.mapx][m->ray.mapy] != '0')
+		if (m->cub.map[m->ray.mapx][m->ray.mapy] == '1')
 			m->ray.hit = 1;
 	}
 	if (m->ray.side == 0)
@@ -119,7 +119,9 @@ int 	raycast(t_index *m)
 		dda(m);
 		line_size(m);
 		write_img(m, m->ray.drawstart, m->ray.drawend, x);
+		m->ray.zbuff[x] = m->ray.perpwalldist;
 		x++;
 	}
+	manage_sprite(m);
 	return (0);
 }

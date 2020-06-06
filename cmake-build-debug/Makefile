@@ -1554,6 +1554,33 @@ srcs/raycast.c.s:
 	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/raycast.c.s
 .PHONY : srcs/raycast.c.s
 
+srcs/sprite.o: srcs/sprite.c.o
+
+.PHONY : srcs/sprite.o
+
+# target to build an object file
+srcs/sprite.c.o:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/sprite.c.o
+.PHONY : srcs/sprite.c.o
+
+srcs/sprite.i: srcs/sprite.c.i
+
+.PHONY : srcs/sprite.i
+
+# target to preprocess a source file
+srcs/sprite.c.i:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/sprite.c.i
+.PHONY : srcs/sprite.c.i
+
+srcs/sprite.s: srcs/sprite.c.s
+
+.PHONY : srcs/sprite.s
+
+# target to generate assembly for a file
+srcs/sprite.c.s:
+	$(MAKE) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/srcs/sprite.c.s
+.PHONY : srcs/sprite.c.s
+
 srcs/wall_color.o: srcs/wall_color.c.o
 
 .PHONY : srcs/wall_color.o
@@ -1776,6 +1803,9 @@ help:
 	@echo "... srcs/raycast.o"
 	@echo "... srcs/raycast.i"
 	@echo "... srcs/raycast.s"
+	@echo "... srcs/sprite.o"
+	@echo "... srcs/sprite.i"
+	@echo "... srcs/sprite.s"
 	@echo "... srcs/wall_color.o"
 	@echo "... srcs/wall_color.i"
 	@echo "... srcs/wall_color.s"

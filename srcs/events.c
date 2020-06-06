@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/04 17:31:00 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/06 16:45:36 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	quit(t_index *m)
 	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
 	mlx_destroy_image(m->cub.m_ptr, m->img.img);
 	ft_free_matrice(m->cub.map);
+	free(m->sprite);
 	system("leaks cub3d");
 	exit(0);
 }

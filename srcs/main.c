@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/03 15:23:48 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/04 17:50:24 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	init(t_index *m, char *arg)
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
 										   &m->img.line_length, &m->img.endian);
 	m->img.line_length /= 4;
+	if ((m->ray.zbuff = malloc(sizeof(*m->ray.zbuff) * m->cub.win.w)) == 0)
+		ft_error(99);
+	if ((m->sprite = malloc(sizeof(*m->sprite) * m->cub.nbrsprt)) == NULL)
+		ft_error(99);
+	index_sprite(m);
 	return (0);
 }
 

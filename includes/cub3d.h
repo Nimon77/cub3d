@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/04 17:21:17 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/06 19:22:36 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_cub
 	t_coord_dbl	pos;
 	t_coord_dbl	plane;
 	t_coord_dbl	dir;
+	int			nbrsprt;
 }				t_cub;
 
 typedef struct	s_move
@@ -120,7 +121,35 @@ typedef struct	s_raycast
 	double		step;
 	double		texpos;
 	t_texture	*current;
+	double		*zbuff;
 }				t_raycast;
+
+typedef struct	s_sprite
+{
+	int			x;
+	int			y;
+	double		distance;
+}				t_sprite;
+
+typedef struct	s_sprcalc
+{
+	double		spr_x;
+	double		spr_y;
+	double		invert;
+	double		trsfm_x;
+	double		trsfm_y;
+	int			sprscreen_x;
+	int			spr_h;
+	int			drawstart_y;
+	int			drawend_y;
+	int 		spr_w;
+	int			drawstart_x;
+	int			drawend_x;
+	int			strip;
+	int			texx;
+	int			texy;
+	int			*color;
+}				t_sprcalc;
 
 typedef struct	s_index
 {
@@ -128,6 +157,8 @@ typedef struct	s_index
 	t_cub		cub;
 	t_move		move;
 	t_raycast	ray;
+	t_sprite	*sprite;
+	t_sprcalc	sprcalc;
 }				t_index;
 
 int				quit(t_index *m);
@@ -146,5 +177,7 @@ int				textures_wall(t_index *m, int i, int x, int drawEnd);
 int				ft_move(t_index *m);
 int				ft_release(int keycode, t_move *move);
 int				ft_press(int keycode, t_move *move);
+void			manage_sprite(t_index *m);
+void			index_sprite(t_index *m);
 
 #endif

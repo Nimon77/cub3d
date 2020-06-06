@@ -19,19 +19,19 @@ void	go_up_down(t_cub *cub, int direction)
 	if (direction == 0)
 	{
 		if (cub->map[(int) (cub->pos.x + cub->dir.x * (moveSpeed + 0.1))]
-			[(int) cub->pos.y] == '0')
+			[(int) cub->pos.y] != '1')
 			cub->pos.x += cub->dir.x * moveSpeed;
 		if (cub->map[(int) cub->pos.x]
-			[(int) (cub->pos.y + cub->dir.y * (moveSpeed + 0.1))] == '0')
+			[(int) (cub->pos.y + cub->dir.y * (moveSpeed + 0.1))] != '1')
 			cub->pos.y += cub->dir.y * moveSpeed;
 	}
 	else
 	{
 		if (cub->map[(int)(cub->pos.x - cub->dir.x * (moveSpeed + 0.1))]
-			[(int)cub->pos.y] == '0')
+			[(int)cub->pos.y] != '1')
 			cub->pos.x -= cub->dir.x * moveSpeed;
 		if (cub->map[(int)cub->pos.x]
-			[(int)(cub->pos.y - cub->dir.y * (moveSpeed + 0.1))] == '0')
+			[(int)(cub->pos.y - cub->dir.y * (moveSpeed + 0.1))] != '1')
 			cub->pos.y -= cub->dir.y * moveSpeed;
 	}
 }
@@ -43,19 +43,19 @@ void	go_left_right(t_cub *cub, int direction)
 	if (direction == 0)
 	{
 		if (cub->map[(int) (cub->pos.x - cub->plane.x * (moveSpeed + 0.1))]
-			[(int) cub->pos.y] == '0')
+			[(int) cub->pos.y] != '1')
 			cub->pos.x -= cub->plane.x * moveSpeed;
 		if (cub->map[(int) cub->pos.x]
-			[(int) (cub->pos.y - cub->plane.y * (moveSpeed + 0.1))] == '0')
+			[(int) (cub->pos.y - cub->plane.y * (moveSpeed + 0.1))] != '1')
 			cub->pos.y -= cub->plane.y * moveSpeed;
 	}
 	else
 	{
 		if (cub->map[(int)(cub->pos.x + cub->plane.x * (moveSpeed + 0.1))]
-			[(int)cub->pos.y] == '0')
+			[(int)cub->pos.y] != '1')
 			cub->pos.x += cub->plane.x * moveSpeed;
 		if (cub->map[(int)cub->pos.x]
-			[(int)(cub->pos.y + cub->plane.y * (moveSpeed + 0.1))] == '0')
+			[(int)(cub->pos.y + cub->plane.y * (moveSpeed + 0.1))] != '1')
 			cub->pos.y += cub->plane.y * moveSpeed;
 	}
 }

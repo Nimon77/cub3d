@@ -197,6 +197,26 @@ void 		ft_select(char *str, t_cub *cub)
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
 }
 
+void		get_sprite(char **map, t_cub *cub)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	cub->nbrsprt = 0;
+	while (map[i][0])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] > '1')
+				cub->nbrsprt++;
+			j++;
+		}
+		i++;
+	}
+}
+
 void		ft_parse(t_cub *cub, char *path)
 {
 	int		fd;
@@ -212,5 +232,6 @@ void		ft_parse(t_cub *cub, char *path)
 	free(str);
 	check_error(cub);
 	get_pose(cub->map, cub);
+	get_sprite(cub->map, cub);
 	close(fd);
 }
