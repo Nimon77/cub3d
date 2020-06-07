@@ -1,11 +1,11 @@
 R 1280 720
 
-NO ./images/grass.xpm
-SO ./images/cobblestone.xpm
-WE ./images/diamond_ore.xpm
-EA ./images/diamond_block.xpm
+NO ./textures/512x512/assets/minecraft/textures/blocks/bedrock.xpm
+SO ./images/fractal2.xpm
+WE ./images/fractal3.xpm
+EA ./textures/512x512/assets/minecraft/textures/blocks/stonebrick_mossy.xpm
 
-S ./images/end_crystal.xpm
+S ./textures/512x512/assets/minecraft/textures/items/apple_golden.xpm
 F 88,41,0
 C 37,253,233
 

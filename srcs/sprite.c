@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 17:37:15 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/06 19:33:00 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/07 18:18:52 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,33 @@ void	sort_sprite(t_index *m)
 	}
 }
 
+void	init_sprite(t_index *m, int i)
+{
+	m->sprcalc.spr_x = m->sprite[i].x - m->cub.pos.x + 0.5;
+	m->sprcalc.spr_y = m->sprite[i].y - m->cub.pos.y + 0.5;
+	m->sprcalc.invert = 1 / (m->cub.plane.x * m->cub.dir.y - m->cub.dir.x *
+															 m->cub.plane.y);
+	m->sprcalc.trsfm_x = m->sprcalc.invert * (m->cub.dir.y *
+			m->sprcalc.spr_x - m->cub.dir.x * m->sprcalc.spr_y);
+	m->sprcalc.trsfm_y = m->sprcalc.invert * (-m->cub.plane.y *
+			m->sprcalc.spr_x + m->cub.plane.x * m->sprcalc.spr_y);
+	m->sprcalc.sprscreen_x = (int)((m->cub.win.w / 2) *
+			(1 + m->sprcalc.trsfm_x / m->sprcalc.trsfm_y));
+	m->sprcalc.spr_h = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
+	m->sprcalc.drawstart_y = -m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
+	m->sprcalc.drawstart_y < 0 ? m->sprcalc.drawstart_y = 0 : 0;
+	m->sprcalc.drawend_y = m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
+	m->sprcalc.drawend_y >= m->cub.win.h ?
+			m->sprcalc.drawend_y = m->cub.win.h - 1 : 0;
+	m->sprcalc.spr_w = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
+	m->sprcalc.drawstart_x = -m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
+	m->sprcalc.drawstart_x < 0 ? m->sprcalc.drawstart_x = 0 : 0;
+	m->sprcalc.drawend_x = m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
+	m->sprcalc.drawend_x >= m->cub.win.w ?
+			m->sprcalc.drawend_x = m->cub.win.w - 1 : 0;
+	m->sprcalc.strip = m->sprcalc.drawstart_x;
+}
+
 void	sprite_project(t_index *m)
 {
 	int	i;
@@ -72,29 +99,7 @@ void	sprite_project(t_index *m)
 	i = 0;
 	while (i < m->cub.nbrsprt)
 	{
-		m->sprcalc.spr_x = m->sprite[i].x - m->cub.pos.x + 0.5;
-		m->sprcalc.spr_y = m->sprite[i].y - m->cub.pos.y + 0.5;
-		m->sprcalc.invert = 1 / (m->cub.plane.x * m->cub.dir.y - m->cub.dir.x *
-				m->cub.plane.y);
-		m->sprcalc.trsfm_x = m->sprcalc.invert * (m->cub.dir.y *
-				m->sprcalc.spr_x - m->cub.dir.x * m->sprcalc.spr_y);
-		m->sprcalc.trsfm_y = m->sprcalc.invert * (-m->cub.plane.y *
-				m->sprcalc.spr_x + m->cub.plane.x * m->sprcalc.spr_y);
-		m->sprcalc.sprscreen_x = (int)((m->cub.win.w / 2) *
-				(1 + m->sprcalc.trsfm_x / m->sprcalc.trsfm_y));
-		m->sprcalc.spr_h = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
-		m->sprcalc.drawstart_y = -m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
-		m->sprcalc.drawstart_y < 0 ? m->sprcalc.drawstart_y = 0 : 0;
-		m->sprcalc.drawend_y = m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
-		m->sprcalc.drawend_y >= m->cub.win.h ?
-			m->sprcalc.drawend_y = m->cub.win.h - 1 : 0;
-		m->sprcalc.spr_w = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
-		m->sprcalc.drawstart_x = -m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
-		m->sprcalc.drawstart_x < 0 ? m->sprcalc.drawstart_x = 0 : 0;
-		m->sprcalc.drawend_x = m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
-		m->sprcalc.drawend_x >= m->cub.win.w ?
-			m->sprcalc.drawend_x = m->cub.win.w - 1 : 0;
-		m->sprcalc.strip = m->sprcalc.drawstart_x;
+		init_sprite(m, i);
 		while (m->sprcalc.strip < m->sprcalc.drawend_x)
 		{
 			m->sprcalc.texx = (int)(256 * (m->sprcalc.strip - (-m->sprcalc.spr_w
@@ -109,8 +114,13 @@ void	sprite_project(t_index *m)
 					d = j * 256 - m->cub.win.h * 128 + m->sprcalc.spr_h * 128;
 					m->sprcalc.texy = ((d * m->cub.sprite->size.h) /
 							m->sprcalc.spr_h) / 256;
-					m->sprcalc.color = &m->cub.sprite->addr[
-							m->cub.sprite->size.w * m->sprcalc.texy * 2 +
+					if (m->cub.sprite->size.h < 64)
+						m->sprcalc.color = &m->cub.sprite->addr[
+								m->cub.sprite->size.w * (m->sprcalc.texy * 64 /
+								m->cub.sprite->size.h) + m->sprcalc.texx];
+					else
+						m->sprcalc.color = &m->cub.sprite->addr[
+							m->cub.sprite->size.w * m->sprcalc.texy +
 							m->sprcalc.texx];
 					if ((*m->sprcalc.color & 0x00FFFFFF)!= 0)
 						m->img.addr[j * m->img.line_length +

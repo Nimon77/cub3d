@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:56:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/04 17:25:19 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/07 18:10:37 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ int	textures_wall(t_index *m, int i, int x, int drawend)
 	calc_vars(m, i);
 	while (i < drawend)
 	{
-		texy = (int)m->ray.texpos & (m->cub.ea->size.h - 1);
+		texy = (int)m->ray.texpos & (m->ray.current->size.h - 1);
 		m->ray.texpos += m->ray.step;
-		m->img.addr[i * m->img.line_length + x] =
-				m->ray.current->addr[texy * m->ray.current->size.h * 2 +
+		if (m->ray.current->size.h < 64)
+			m->img.addr[i * m->img.line_length + x] =
+					m->ray.current->addr[texy * (m->ray.current->size.h * 64 /
+					m->ray.current->size.h) + m->ray.texx];
+		else
+			m->img.addr[i * m->img.line_length + x] =
+				m->ray.current->addr[texy * m->ray.current->size.h +
 				m->ray.texx];
 		i++;
 	}
