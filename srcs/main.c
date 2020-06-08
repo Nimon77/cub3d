@@ -29,10 +29,6 @@ int	init(t_index *m, char *arg)
 	m->cub.plane.y = 0.66;
 	ft_move_init(m);
 	ft_parse(&m->cub, arg);
-	m->img.img = mlx_new_image(m->cub.m_ptr, m->cub.win.w, m->cub.win.h);
-	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
-										   &m->img.line_length, &m->img.endian);
-	m->img.line_length /= 4;
 	if ((m->ray.zbuff = malloc(sizeof(*m->ray.zbuff) * m->cub.win.w)) == 0)
 		ft_error(99);
 	if ((m->sprite = malloc(sizeof(*m->sprite) * m->cub.nbrsprt)) == NULL)
@@ -43,9 +39,14 @@ int	init(t_index *m, char *arg)
 
 int	loop(t_index *m)
 {
+	m->img.img = mlx_new_image(m->cub.m_ptr, m->cub.win.w, m->cub.win.h);
+	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
+										   &m->img.line_length, &m->img.endian);
+	m->img.line_length /= 4;
 	raycast(m);
 	ft_move(m);
 	mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
+	mlx_destroy_image(m->cub.m_ptr, m->img.img);
 	return (0);
 }
 
