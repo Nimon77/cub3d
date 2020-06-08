@@ -46,8 +46,8 @@
 # define PRESS_MASK 1
 # define RELEASE_EVENT 3
 # define RELEASE_MASK 2
-# define MOVE_SPEED 0.03
-# define ROTATE_SPEED 0.015
+# define MOVE_SPEED 0.05
+# define ROTATE_SPEED 0.02
 
 typedef struct	s_color
 {

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 17:37:15 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/07 18:18:52 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/08 14:57:00 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	sprite_project(t_index *m)
 						m->sprcalc.color = &m->cub.sprite->addr[
 							m->cub.sprite->size.w * m->sprcalc.texy +
 							m->sprcalc.texx];
-					if ((*m->sprcalc.color & 0x00FFFFFF)!= 0)
+					if ((*m->sprcalc.color & 0x00FFFFFF) != 0)
 						m->img.addr[j * m->img.line_length +
 							m->sprcalc.strip] = *m->sprcalc.color;
 					j++;

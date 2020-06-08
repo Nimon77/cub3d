@@ -2,7 +2,7 @@ R 1280 720
 
 NO ./textures/512x512/assets/minecraft/textures/blocks/bedrock.xpm
 SO ./images/fractal2.xpm
-WE ./images/fractal3.xpm
+WE ./textures/512x512/assets/minecraft/textures/blocks/cactus_side.xpm
 EA ./textures/512x512/assets/minecraft/textures/blocks/stonebrick_mossy.xpm
 
 S ./textures/512x512/assets/minecraft/textures/items/apple_golden.xpm
