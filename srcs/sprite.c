@@ -114,7 +114,7 @@ void	sprite_project(t_index *m)
 					d = j * 256 - m->cub.win.h * 128 + m->sprcalc.spr_h * 128;
 					m->sprcalc.texy = ((d * m->cub.sprite->size.h) /
 							m->sprcalc.spr_h) / 256;
-					if (m->cub.sprite->size.h < 64)
+					if (m->cub.sprite->size.h < 64 && APPLE)
 						m->sprcalc.color = &m->cub.sprite->addr[
 								m->cub.sprite->size.w * (m->sprcalc.texy * 64 /
 								m->cub.sprite->size.h) + m->sprcalc.texx];

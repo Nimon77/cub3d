@@ -50,7 +50,7 @@ int	textures_wall(t_index *m, int i, int x, int drawend)
 	{
 		texy = (int)m->ray.texpos & (m->ray.current->size.h - 1);
 		m->ray.texpos += m->ray.step;
-		if (m->ray.current->size.h < 64)
+		if (m->ray.current->size.h < 64 && APPLE)
 			m->img.addr[i * m->img.line_length + x] =
 					m->ray.current->addr[texy * (m->ray.current->size.h * 64 /
 					m->ray.current->size.h) + m->ray.texx];

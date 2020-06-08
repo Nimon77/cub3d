@@ -20,12 +20,34 @@
 # include "libft.h"
 # include "mlx.h"
 
+#ifdef __APPLE__
+# define ESC 53
+# define FORWARD 13
+# define BACK 1
+# define LEFT 0
+# define RIGHT 2
+# define TURNLEFT 123
+# define TURNRIGHT 124
+# define APPLE 1
+#endif
+
+#ifdef __linux__
+# define ESC 65307
+# define FORWARD 122
+# define BACK 115
+# define LEFT 113
+# define RIGHT 100
+# define TURNLEFT 65361
+# define TURNRIGHT 65363
+# define APPLE 0
+#endif
+
 # define PRESS_EVENT 2
 # define PRESS_MASK 1
 # define RELEASE_EVENT 3
 # define RELEASE_MASK 2
-# define MOVE_SPEED 0.05
-# define ROTATE_SPEED 0.03
+# define MOVE_SPEED 0.03
+# define ROTATE_SPEED 0.015
 
 typedef struct	s_color
 {

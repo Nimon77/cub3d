@@ -30,38 +30,38 @@ int	quit(t_index *m)
 
 int	ft_release(int keycode, t_move *move)
 {
-	if (keycode == 53)
+	if (keycode == ESC)
 		move->esc = 0;
-	else if (keycode == 13)
+	else if (keycode == FORWARD)
 		move->foward = 0;
-	else if (keycode == 1)
+	else if (keycode == BACK)
 		move->back = 0;
-	else if (keycode == 0)
+	else if (keycode == LEFT)
 		move->left = 0;
-	else if (keycode == 2)
+	else if (keycode == RIGHT)
 		move->right = 0;
-	else if (keycode == 123)
+	else if (keycode == TURNLEFT)
 		move->turn_left = 0;
-	else if (keycode == 124)
+	else if (keycode == TURNRIGHT)
 		move->turn_right = 0;
 	return (0);
 }
 
 int	ft_press(int keycode, t_move *move)
 {
-	if (keycode == 53)
+	if (keycode == ESC)
 		move->esc = 1;
-	else if (keycode == 13)
+	else if (keycode == FORWARD)
 		move->foward = 1;
-	else if (keycode == 1)
+	else if (keycode == BACK)
 		move->back = 1;
-	else if (keycode == 0)
+	else if (keycode == LEFT)
 		move->left = 1;
-	else if (keycode == 2)
+	else if (keycode == RIGHT)
 		move->right = 1;
-	else if (keycode == 123)
+	else if (keycode == TURNLEFT)
 		move->turn_left = 1;
-	else if (keycode == 124)
+	else if (keycode == TURNRIGHT)
 		move->turn_right = 1;
 	return (0);
 }
