@@ -6,7 +6,7 @@
 #    By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/14 17:40:05 by nsimon            #+#    #+#              #
-#    Updated: 2020/02/24 12:20:26 by nsimon           ###   ########.fr        #
+#    Updated: 2020/06/11 17:28:50 by nsimon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,7 @@ SRC_NAME    = 	ft_memset.c			\
 		  		ft_lstmap.c			\
 		  		get_next_line.c		\
 		  		ft_atoi_base.c		\
-		  		ft_itoa_base.c		\
-		  		ft_abs.c
-
+		  		ft_itoa_base.c		
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

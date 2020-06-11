@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/06 19:22:36 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/11 14:51:43 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define TURNLEFT 123
 # define TURNRIGHT 124
 # define APPLE 1
+# define LINUX 0
 #endif
 
 #ifdef __linux__
@@ -40,6 +41,7 @@
 # define TURNLEFT 65361
 # define TURNRIGHT 65363
 # define APPLE 0
+# define LINUX 1
 #endif
 
 # define PRESS_EVENT 2
@@ -47,7 +49,7 @@
 # define RELEASE_EVENT 3
 # define RELEASE_MASK 2
 # define MOVE_SPEED 0.05
-# define ROTATE_SPEED 0.02
+# define ROTATE_SPEED 0.03
 
 typedef struct	s_color
 {
@@ -184,16 +186,18 @@ typedef struct	s_index
 }				t_index;
 
 int				quit(t_index *m);
-void			ft_error(int error);
 void			ft_free_matrice(char **str);
 void			ft_parse(t_cub *cub, char *path);
+void			ft_error(int error);
+void			check_parse_error(t_cub *cub);
 int				get_color(char *str);
 int				raycast(t_index *m);
+int				check_textures(char *str);
 void			ft_move_init(t_index *m);
 void			go_up_down(t_cub *cub, int direction);
 void			go_left_right(t_cub *cub, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
-void			check_map(t_cub *cub);
+int				check_map(t_cub *cub);
 int				color_wall(t_index *m, int i, int x, int drawEnd);
 int				textures_wall(t_index *m, int i, int x, int drawEnd);
 int				ft_move(t_index *m);

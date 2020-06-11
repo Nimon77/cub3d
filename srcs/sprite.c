@@ -41,7 +41,6 @@ void	sort_sprite(t_index *m)
 {
 	int			i;
 	int 		j;
-	int			d;
 	t_sprite	tmp;
 	
 	

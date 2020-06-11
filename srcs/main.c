@@ -19,7 +19,8 @@ int	init(t_index *m, char *arg)
 		return (EXIT_FAILURE);
 	m->cub.win.w = 0;
 	m->cub.win.h = 0;
-	m->cub.map = malloc(sizeof(m->cub.map));
+	if ((m->cub.map = malloc(sizeof(m->cub.map))) == NULL)
+		ft_error(99);
 	m->cub.map[0] = ft_strdup("");
 	m->cub.pos.x = -1;
 	m->cub.pos.y = -1;
@@ -29,7 +30,8 @@ int	init(t_index *m, char *arg)
 	m->cub.plane.y = 0.66;
 	ft_move_init(m);
 	ft_parse(&m->cub, arg);
-	if ((m->ray.zbuff = malloc(sizeof(*m->ray.zbuff) * m->cub.win.w)) == 0)
+	check_parse_error(&m->cub);
+	if ((m->ray.zbuff = malloc(sizeof(*m->ray.zbuff) * m->cub.win.w)) == NULL)
 		ft_error(99);
 	if ((m->sprite = malloc(sizeof(*m->sprite) * m->cub.nbrsprt)) == NULL)
 		ft_error(99);

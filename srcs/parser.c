@@ -6,28 +6,44 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/29 17:43:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/11 15:51:55 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int			verif_size(char *str)
+{
+	int	i;
+	
+	i = 2;
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]) && str[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		get_size(char *str, t_cub *cub)
 {
 	int	i;
 	
-	i = 0;
-	while (str[i] != '\0')
+	i = 2;
+	if (verif_size(str))
+		return;
+	if (ft_isdigit(str[i]))
 	{
-		if (ft_isdigit(str[i]))
-		{
-			cub->win.w == 0 ? cub->win.w = ft_atoi(&str[i]) : 0;
-			while (str[i] != ' ' && str[i] != '\0')
-				i++;
-			cub->win.h == 0 ? cub->win.h = ft_atoi(&str[i]) : 0;
-		}
-		else
+		cub->win.w == 0 ? cub->win.w = ft_atoi(&str[i]) : 0;
+		while (str[i] != ' ' && str[i] != '\0')
 			i++;
+		cub->win.h == 0 ? cub->win.h = ft_atoi(&str[i]) : 0;
+	}
+	if (APPLE)
+	{
+		cub->win.h > 1235 ? cub->win.h = 1235 : 0;
+		cub->win.w > 2048 ? cub->win.w = 2048 : 0;
 	}
 }
 
@@ -40,7 +56,7 @@ t_texture	*get_texture(char *str, t_cub *cub)
 	char pth[256];
 	
 	i = 2;
-	j = 0;
+	j = check_textures(str);
 	ft_memset(&pth, 0, 256);
 	while (str[i] == ' ' && str[i])
 		i++;
@@ -50,7 +66,7 @@ t_texture	*get_texture(char *str, t_cub *cub)
 		return (NULL);
 	close(fd);
 	if ((img = malloc(sizeof(*img))) == NULL)
-		return NULL;
+		ft_error(99);
 	img->img = mlx_xpm_file_to_image(cub->m_ptr, pth, &img->size.w,
 	 	&img->size.h);
 	img->addr = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
@@ -63,10 +79,13 @@ void		ft_free_matrice(char **str)
 	int		i;
 	
 	i = 0;
-	while (str[i][0] != '\0')
-		free(str[i++]);
-	free(str[i]);
-	free(str);
+	if (str)
+	{
+		while (str[i][0] != '\0')
+			free(str[i++]);
+		free(str[i]);
+		free(str);
+	}
 }
 
 void		get_map(char *str, t_cub *cub)
@@ -78,7 +97,8 @@ void		get_map(char *str, t_cub *cub)
 	i[1] = 0;
 	while (cub->map[i[1]][0] != '\0')
 		i[1]++;
-	tmp = malloc(sizeof(*tmp) * (i[1] + 2));
+	if ((tmp = malloc(sizeof(*tmp) * (i[1] + 2))) == NULL)
+		ft_error(99);
 	while (++i[0] < i[1])
 		tmp[i[0]] = ft_strdup(cub->map[i[0]]);
 	ft_free_matrice(cub->map);
@@ -116,17 +136,6 @@ int			get_color(char *str)
 	        rvb.b > 255)
 		return (-1);
 	return ((rvb.r * 256 * 256) + (rvb.v * 256) + (rvb.b));
-}
-
-int			check_error(t_cub *cub)
-{
-	if (cub->no == NULL || cub->ea == NULL || cub->so == NULL ||
-			cub->we == NULL || cub->sprite == NULL || cub->map == NULL)
-		ft_error(1);
-	if (cub->sol == -1 || cub->plafond == -1)
-		ft_error(2);
-	check_map(cub);
-	return (0);
 }
 
 void		calc_dir(t_cub *cub, char c)
@@ -169,7 +178,7 @@ void		get_pose(char **map, t_cub *cub)
 		while (map[x][y])
 		{
 			if (ft_isalpha(map[x][y]) && cub->pos.x != -1 && cub->pos.y != -1)
-				ft_error(3);
+				ft_error(6);
 			if ((map[x][y] == 'N' || map[x][y] == 'E' || map[x][y] == 'S' ||
 					map[x][y] == 'W') && cub->pos.x == -1 && cub->pos.y == -1)
 			{
@@ -230,7 +239,6 @@ void		ft_parse(t_cub *cub, char *path)
 	}
 	ft_select(str, cub);
 	free(str);
-	check_error(cub);
 	get_pose(cub->map, cub);
 	get_sprite(cub->map, cub);
 	close(fd);
