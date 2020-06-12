@@ -29,6 +29,7 @@ int			verif_size(char *str)
 void		get_size(char *str, t_cub *cub)
 {
 	int	i;
+	int size[2];
 	
 	i = 2;
 	if (verif_size(str))
@@ -45,16 +46,22 @@ void		get_size(char *str, t_cub *cub)
 		cub->win.h > 1235 ? cub->win.h = 1235 : 0;
 		cub->win.w > 2048 ? cub->win.w = 2048 : 0;
 	}
+	else
+	{
+		mlx_get_screen_size(cub->m_ptr, &size[1], &size[0]);
+		cub->win.h > size[0] ? cub->win.h = size[0] : 0;
+		cub->win.w > size[1] ? cub->win.w = size[1] : 0;
+	}
 }
 
-t_texture	*get_texture(char *str, t_cub *cub)
+t_texture 	*get_texture(char *str, t_cub *cub, t_texture *tex)
 {
 	int	i;
 	int j;
-	int fd;
 	t_texture *img;
 	char pth[256];
-	
+
+	tex != NULL ? ft_error(11) : 0;
 	i = 2;
 	j = check_textures(str);
 	ft_memset(&pth, 0, 256);
@@ -62,13 +69,10 @@ t_texture	*get_texture(char *str, t_cub *cub)
 		i++;
 	while (str[i] != ' ' && str[i])
 		pth[j++] = str[i++];
-	if ((fd = open(pth, O_RDONLY)) == -1)
-		return (NULL);
-	close(fd);
 	if ((img = malloc(sizeof(*img))) == NULL)
 		ft_error(99);
 	img->img = mlx_xpm_file_to_image(cub->m_ptr, pth, &img->size.w,
-	 	&img->size.h);
+			&img->size.h);
 	img->addr = (int *)mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	return (img);
@@ -108,6 +112,24 @@ void		get_map(char *str, t_cub *cub)
 	cub->map = tmp;
 }
 
+void check_color(char *str, t_color *rvb)
+{
+	int	i;
+	
+	i = 2;
+	rvb->r = -1;
+	rvb->v = -1;
+	rvb->b = -1;
+	while (str[i] == ' ' && str[i])
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && str[i] != ',')
+			ft_error(12);
+		i++;
+	}
+}
+
 int			get_color(char *str)
 {
 	int		i;
@@ -116,9 +138,7 @@ int			get_color(char *str)
 	i = 2;
 	while (str[i] == ' ' && str[i])
 		i++;
-	rvb.r = -1;
-	rvb.v = -1;
-	rvb.b = -1;
+	check_color(str, &rvb);
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.r == -1 &&
@@ -196,11 +216,16 @@ void		get_pose(char **map, t_cub *cub)
 void 		ft_select(char *str, t_cub *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
-	str[0] == 'N' && str[1] == 'O' ? cub->no = get_texture(str, cub) : 0;
-	str[0] == 'S' && str[1] == 'O' ? cub->so = get_texture(str, cub) : 0;
-	str[0] == 'W' && str[1] == 'E' ? cub->we = get_texture(str, cub) : 0;
-	str[0] == 'E' && str[1] == 'A' ? cub->ea = get_texture(str, cub) : 0;
-	str[0] == 'S' && str[1] == ' ' ? cub->sprite = get_texture(str, cub) : 0;
+	if (str[0] == 'N' && str[1] == 'O')
+		cub->no = get_texture(str, cub, cub->no);
+	if (str[0] == 'S' && str[1] == 'O')
+		cub->so = get_texture(str, cub, cub->so);
+	if (str[0] == 'W' && str[1] == 'E')
+		cub->we = get_texture(str, cub, cub->we);
+	if (str[0] == 'E' && str[1] == 'A')
+		cub->ea = get_texture(str, cub, cub->ea);
+	if (str[0] == 'S' && str[1] == ' ')
+		cub->sprite = get_texture(str, cub, cub->sprite);
 	str[0] == 'F' ? cub->sol = get_color(str) : 0;
 	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;

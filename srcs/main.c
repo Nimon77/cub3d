@@ -28,6 +28,10 @@ int	init(t_index *m, char *arg)
 	m->cub.dir.y = 0;
 	m->cub.plane.x = 0;
 	m->cub.plane.y = 0.66;
+	m->cub.no = NULL;
+	m->cub.so = NULL;
+	m->cub.ea = NULL;
+	m->cub.we = NULL;
 	ft_move_init(m);
 	ft_parse(&m->cub, arg);
 	check_parse_error(&m->cub);

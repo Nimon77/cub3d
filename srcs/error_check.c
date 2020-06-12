@@ -14,8 +14,8 @@
 
 static int		ft_ismap(char c)
 {
-	if (c == 'N' || c == 'E' || c == 'S' || c == 'W' || ft_isdigit(c) ||
-		c == ' ')
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W' || c == '1' || c == '0' ||
+		c == '2')
 		return (1);
 	return (0);
 }
@@ -34,7 +34,7 @@ int 	check_map(t_cub *cub)
 		while (map[i][j] != '\0')
 		{
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' ||
-					map[i][j] == 'E' || map[i][j] == 'W')
+					map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == '2')
 			{
 				if (i == 0 || map[i + 1][0] == 0 || j == 0 ||
 						map[i][j + 1] == 0)
@@ -88,13 +88,15 @@ void	ft_error(int error)
 	error == 1 ? printf("Error\nResolution\n") : 0;
 	error == 2 ? printf("Error\nTextures\n") : 0;
 	error == 3 ? printf("Error\nSprite\n") : 0;
-	error == 4 ? printf("Error\nCouleur de sol\n") : 0;
-	error == 5 ? printf("Error\nCouleur de plafond\n") : 0;
+	error == 4 ? printf("Error\nColor of ground\n") : 0;
+	error == 5 ? printf("Error\nColor of sky\n") : 0;
 	error == 6 ? printf("Error\nMap\n") : 0;
 	error == 7 ? printf("Error\nStart position\n") : 0;
 	error == 8 ? printf("Error\nTexture not XPM format\n") : 0;
 	error == 9 ? printf("Error\nSprite not XPM format\n") : 0;
-	error == 10 ? printf("Error\nOpen textures") : 0;
+	error == 10 ? printf("Error\nOpen textures\n") : 0;
+	error == 11 ? printf("Error\nMultiple textures for side or sprite\n") : 0;
+	error == 12 ? printf("Error\nError color of floor or sky\n") : 0;
 	error == 99 ? printf("Error\nMalloc\n") : 0;
 	exit(error);
 }
