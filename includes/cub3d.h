@@ -41,7 +41,7 @@
 #  define RIGHT 100
 #  define TURNLEFT 65361
 #  define TURNRIGHT 65363
-#  define SPRINT 257
+#  define SPRINT 65505
 #  define APPLE 0
 #  define LINUX 1
 # endif
