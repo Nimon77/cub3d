@@ -43,7 +43,6 @@ int	ft_release(int keycode, t_move *move)
 		move->turn_right = 0;
 	else if (keycode == SPRINT)
 		move->movespeed = 0;
-	printf("%d\n", keycode);
 	return (0);
 }
 
