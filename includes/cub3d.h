@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 18:30:57 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 20:08:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
 
