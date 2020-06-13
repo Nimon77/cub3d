@@ -13,12 +13,12 @@ include_directories(libft)
 
 file(GLOB SRCS "srcs/*.c")
 #file(GLOB LIBFT "libft/*.c")
-link_libraries(mlx)
-link_libraries(X11)
-link_libraries(m)
-link_libraries(Xext)
+#link_libraries(mlx)
+#link_libraries(X11)
+#link_libraries(m)
+#link_libraries(Xext)
 #file(GLOB MLX "mlx/libmlx.a")
-#file(GLOB MLX "./mlx/libmlx.dylib")
+file(GLOB MLX "./mlx/libmlx.dylib")
 
 add_executable(cub3d ${SRCS})
 

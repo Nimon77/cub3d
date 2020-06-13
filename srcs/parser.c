@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/11 15:51:55 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 03:38:10 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,9 @@ void		get_size(char *str, t_cub *cub)
 			i++;
 		cub->win.h == 0 ? cub->win.h = ft_atoi(&str[i]) : 0;
 	}
-	if (APPLE)
-	{
-		cub->win.h > 1235 ? cub->win.h = 1235 : 0;
-		cub->win.w > 2048 ? cub->win.w = 2048 : 0;
-	}
-	else
-	{
-		mlx_get_screen_size(cub->m_ptr, &size[1], &size[0]);
-		cub->win.h > size[0] ? cub->win.h = size[0] : 0;
-		cub->win.w > size[1] ? cub->win.w = size[1] : 0;
-	}
+	mlx_get_screen_size(cub->m_ptr, &size[1], &size[0]);
+	cub->win.h > size[0] - 45 ? cub->win.h = size[0] - 45 : 0;
+	cub->win.w > size[1] ? cub->win.w = size[1] : 0;
 }
 
 t_texture 	*get_texture(char *str, t_cub *cub, t_texture *tex)
@@ -259,10 +251,13 @@ void		ft_parse(t_cub *cub, char *path)
 	fd = open(path, O_RDONLY);
 	while (get_next_line(fd, &str) > 0)
 	{
+		if (cub->map[0][0] != '\0' && str[0] == '\0')
+			break;
 		ft_select(str, cub);
 		free(str);
 	}
-	ft_select(str, cub);
+	if (str[0] != '\0' && cub->map[0][0] == '\0')
+		ft_select(str, cub);
 	free(str);
 	get_pose(cub->map, cub);
 	get_sprite(cub->map, cub);
