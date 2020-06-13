@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:07:42 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:56:44 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:35:54 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void			ft_error(int error)
 	error == 14 ? printf("Error\nmlx_init impossible\n") : 0;
 	error == 15 ? printf("Error\n.cub file not found or corrupted") : 0;
 	error == 99 ? printf("Error\nMalloc\n") : 0;
-	system("leaks cub3d");
 	exit(0);
 }
 

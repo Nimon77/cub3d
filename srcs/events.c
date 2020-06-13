@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 18:35:54 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:36:28 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	quit(t_index *m)
 	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
 	ft_free_matrice(m->cub.map);
 	free(m->sprite);
-	system("leaks cub3d");
 	exit(0);
 }
 
