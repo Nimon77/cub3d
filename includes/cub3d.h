@@ -17,7 +17,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-# include "libft.h"
+# include "libftprintf.h"
 # include "mlx.h"
 
 # ifdef __APPLE__

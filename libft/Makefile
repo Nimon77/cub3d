@@ -5,107 +5,81 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/14 17:40:05 by nsimon            #+#    #+#              #
-#    Updated: 2020/06/11 17:28:50 by nsimon           ###   ########.fr        #
+#    Created: 2020/01/29 17:07:11 by nsimon            #+#    #+#              #
+#    Updated: 2020/02/19 00:56:36 by nsimon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libftprintf.a
 
-# Path
+INC_PATH = ./includes/
+
+SRC_PATH = ./srcs/
+
+SRC_NAME =	ft_printf.c					\
+			ft_printf_simple.c			\
+			ft_printf_uint.c			\
+			ft_printf_pointer.c			\
+			ft_hexa_converter.c			\
+			ft_flags.c					\
+			ft_utils.c
+
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 
 OBJ_PATH = ./objs/
 
-# Name
-
-SRC_NAME    = 	ft_memset.c			\
-		  		ft_bzero.c			\
-		  		ft_memcpy.c			\
-		  		ft_memccpy.c		\
-		  		ft_memmove.c		\
-		  		ft_memchr.c			\
-		  		ft_memcmp.c			\
-		  		ft_isalnum.c		\
-		  		ft_isalpha.c		\
-		  		ft_isascii.c		\
-		  		ft_isdigit.c		\
-		  		ft_isprint.c		\
-		  		ft_strchr.c			\
-		  		ft_strlcpy.c		\
-		  		ft_strlen.c			\
-		  		ft_strncmp.c		\
-		  		ft_strrchr.c		\
-		  		ft_tolower.c		\
-		  		ft_toupper.c		\
-		  		ft_strlcat.c		\
-		  		ft_strnstr.c		\
-		  		ft_atoi.c			\
-		  		ft_calloc.c			\
-		  		ft_strdup.c			\
-		  		ft_substr.c			\
-		  		ft_strjoin.c		\
-		  		ft_strtrim.c		\
-		  		ft_split.c			\
-		  		ft_itoa.c			\
-		  		ft_strmapi.c		\
-		  		ft_putchar_fd.c		\
-				ft_putstr_fd.c		\
-				ft_putendl_fd.c		\
-				ft_putnbr_fd.c		\
-				ft_lstnew.c			\
-				ft_lstadd_front.c	\
-				ft_lstsize.c		\
-	    		ft_lstlast.c		\
-	    		ft_lstadd_back.c	\
-		  		ft_lstdelone.c		\
-		  		ft_lstclear.c		\
-		  		ft_lstiter.c		\
-		  		ft_lstmap.c			\
-		  		get_next_line.c		\
-		  		ft_atoi_base.c		\
-		  		ft_itoa_base.c		
-
 OBJ_NAME = $(SRC_NAME:.c=.o)
-
-# Files
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-# Flags
+LBPATH = ./libft/
+
+LDFLAGS = -L$(LBPATH)
+
+LIB = $(LBPATH)libft.a
 
 CC = gcc $(CFLAGS)
 
 CFLAGS = -Wall -Wextra -Werror
 
-# Rules
+TEMP = .temp.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@make -C $(LBPATH)
 	@echo "\033[34mCreation of $(NAME) ...\033[0m"
+	@cp $(LIB) $(NAME)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 
-$(OBJ_PATH)%.o: %.c
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
+	@$(CC) -I$(INC_PATH) -o $@ -c $<
 
 clean:
+	@make clean -C $(LBPATH)
 	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "\033[31mFiles .o deleted\n\033[0m"
 
 fclean: clean
+	@make fclean -C $(LBPATH)
 	@echo "\033[33mRemoval of $(NAME)...\033[0m"
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(TEMP)
 	@echo "\033[31mBinary $(NAME) deleted\n\033[0m"
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+git:
+	@git add .
+	@git commit -m "$(NAME)"
+	@git push
 
 norme:
 	norminette $(SRC)
 	norminette $(INC_PATH)*.h
+
+.PHONY: all, clean, fclean, re

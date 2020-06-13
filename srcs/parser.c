@@ -78,7 +78,7 @@ void		get_map(char *str, t_cub *cub)
 	cub->map = tmp;
 }
 
-void		ft_select(char *str, t_cub *cub)
+static void	ft_select(char *str, t_cub *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
 	if (str[0] == 'N' && str[1] == 'O')
