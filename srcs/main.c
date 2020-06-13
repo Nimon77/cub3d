@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:37:46 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:41:24 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init(t_index *m, char *arg)
 {
 	init_cub(m);
-	m->move.moveSpeed = 0;
+	m->move.movespeed = 0;
 	ft_move_init(m);
 	ft_parse(&m->cub, arg);
 	check_parse_error(&m->cub);

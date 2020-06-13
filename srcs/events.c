@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:29:10 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:35:54 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_release(int keycode, t_move *move)
 	else if (keycode == TURNRIGHT)
 		move->turn_right = 0;
 	else if (keycode == SPRINT)
-		move->moveSpeed = 0;
+		move->movespeed = 0;
 	printf("%d\n", keycode);
 	return (0);
 }
@@ -65,7 +65,7 @@ int	ft_press(int keycode, t_move *move)
 	else if (keycode == TURNRIGHT)
 		move->turn_right = 1;
 	else if (keycode == SPRINT)
-		move->moveSpeed = 0.1;
+		move->movespeed = 0.1;
 	return (0);
 }
 

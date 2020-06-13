@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 20:37:44 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:17:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:17:33 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	go_up_down(t_index *m, int direction)
 	float	movespeed;
 
 	cub = &m->cub;
-	movespeed = MOVE_SPEED + m->move.moveSpeed;
+	movespeed = MOVE_SPEED + m->move.movespeed;
 	if (direction == 0)
 	{
 		if (cub->map[(int)(cub->pos.x + cub->dir.x * (movespeed + 0.1))]
@@ -45,7 +45,7 @@ void	go_left_right(t_index *m, int direction)
 	float	movespeed;
 
 	cub = &m->cub;
-	movespeed = MOVE_SPEED + m->move.moveSpeed;
+	movespeed = MOVE_SPEED + m->move.movespeed;
 	if (direction == 0)
 	{
 		if (cub->map[(int)(cub->pos.x - cub->plane.x * (movespeed + 0.1))]

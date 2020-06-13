@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 18:19:10 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:30:57 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,31 @@
 # include "libft.h"
 # include "mlx.h"
 
-#ifdef __APPLE__
-# define ESC 53
-# define FORWARD 13
-# define BACK 1
-# define LEFT 0
-# define RIGHT 2
-# define TURNLEFT 123
-# define TURNRIGHT 124
-# define SPRINT 257
-# define APPLE 1
-# define LINUX 0
-#endif
+# ifdef __APPLE__
+#  define ESC 53
+#  define FORWARD 13
+#  define BACK 1
+#  define LEFT 0
+#  define RIGHT 2
+#  define TURNLEFT 123
+#  define TURNRIGHT 124
+#  define SPRINT 257
+#  define APPLE 1
+#  define LINUX 0
+# endif
 
-#ifdef __linux__
-# define ESC 65307
-# define FORWARD 122
-# define BACK 115
-# define LEFT 113
-# define RIGHT 100
-# define TURNLEFT 65361
-# define TURNRIGHT 65363
-# define SPRINT 257
-# define APPLE 0
-# define LINUX 1
-#endif
+# ifdef __linux__
+#  define ESC 65307
+#  define FORWARD 122
+#  define BACK 115
+#  define LEFT 113
+#  define RIGHT 100
+#  define TURNLEFT 65361
+#  define TURNRIGHT 65363
+#  define SPRINT 257
+#  define APPLE 0
+#  define LINUX 1
+# endif
 
 # define PRESS_EVENT 2
 # define PRESS_MASK 1
@@ -122,7 +122,7 @@ typedef struct	s_move
 	int			right;
 	int			turn_left;
 	int			turn_right;
-	float		moveSpeed;
+	float		movespeed;
 }				t_move;
 
 typedef struct	s_raycast
@@ -170,7 +170,7 @@ typedef struct	s_sprcalc
 	int			spr_h;
 	int			drawstart_y;
 	int			drawend_y;
-	int 		spr_w;
+	int			spr_w;
 	int			drawstart_x;
 	int			drawend_x;
 	int			strip;
@@ -202,7 +202,7 @@ void			go_up_down(t_index *m, int direction);
 void			go_left_right(t_index *m, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
 int				check_map(t_cub *cub);
-int				textures_wall(t_index *m, int i, int x, int drawEnd);
+int				textures_wall(t_index *m, int i, int x, int drawend);
 int				ft_move(t_index *m);
 int				ft_release(int keycode, t_move *move);
 int				ft_press(int keycode, t_move *move);
