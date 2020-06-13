@@ -50,15 +50,15 @@ LDINCL = -I$(LBPATH)includes
 
 MLXPATH = ./mlx/
 
-MLXINCL = -I$(MLXPATH)
-
 ifeq ($(UNAME_S),Darwin)
-	MLXNAME = $(MLXPATH)libmlx.dylib
+	MLXINCL = -I$(MLXPATH)/osx/
+	MLXNAME = $(MLXPATH)osx/libmlx.dylib
 	MLXOPTION = -framework OpenGL -framework AppKit
 endif
 ifeq ($(UNAME_S),Linux)
-	MLXNAME = $(MLXPATH)libmlx.a
-	MLXOPTION = -lX11 -lm
+	MLXINCL = -I$(MLXPATH)/linux/
+	MLXNAME = $(MLXPATH)linux/libmlx.a
+	MLXOPTION = -lX11 -lm -lXext
 endif
 
 CC = gcc $(CFLAGS)
