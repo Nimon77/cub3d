@@ -9,7 +9,8 @@ set(CMAKE_C_FLAGS "-Wextra -Wall -Werror")
 set(HALIDE_DISTRIB_USE_STATIC_LIBRARY TRUE)
 
 include_directories(includes)
-include_directories(libft)
+include_directories(libft/includes)
+include_directories(mlx)
 
 file(GLOB SRCS "srcs/*.c")
 #file(GLOB LIBFT "libft/*.c")
@@ -23,7 +24,7 @@ file(GLOB MLX "./mlx/libmlx.dylib")
 add_executable(cub3d ${SRCS})
 
 #target_link_libraries(cub3d ${PROJECT_LINK_LIBFT})
-target_link_libraries(cub3d ${CMAKE_SOURCE_DIR}/libft/libft.a)
+target_link_libraries(cub3d ${CMAKE_SOURCE_DIR}/libft/libftprintf.a)
 if (APPLE)
     target_link_libraries(cub3d ${CMAKE_SOURCE_DIR}/mlx/libmlx.dylib)
     target_link_libraries(cub3d "-framework OpenGL -framework AppKit")
