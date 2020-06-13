@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/11 14:51:43 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:04:53 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define RIGHT 2
 # define TURNLEFT 123
 # define TURNRIGHT 124
+# define SPRINT 257
 # define APPLE 1
 # define LINUX 0
 #endif
@@ -40,6 +41,7 @@
 # define RIGHT 100
 # define TURNLEFT 65361
 # define TURNRIGHT 65363
+# define SPRINT 257
 # define APPLE 0
 # define LINUX 1
 #endif
@@ -108,6 +110,7 @@ typedef struct	s_cub
 	t_coord_dbl	plane;
 	t_coord_dbl	dir;
 	int			nbrsprt;
+	int			save;
 }				t_cub;
 
 typedef struct	s_move
@@ -119,6 +122,7 @@ typedef struct	s_move
 	int			right;
 	int			turn_left;
 	int			turn_right;
+	float		moveSpeed;
 }				t_move;
 
 typedef struct	s_raycast
@@ -194,8 +198,8 @@ int				get_color(char *str);
 int				raycast(t_index *m);
 int				check_textures(char *str);
 void			ft_move_init(t_index *m);
-void			go_up_down(t_cub *cub, int direction);
-void			go_left_right(t_cub *cub, int direction);
+void			go_up_down(t_index *m, int direction);
+void			go_left_right(t_index *m, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
 int				check_map(t_cub *cub);
 int				color_wall(t_index *m, int i, int x, int drawEnd);
@@ -205,5 +209,7 @@ int				ft_release(int keycode, t_move *move);
 int				ft_press(int keycode, t_move *move);
 void			manage_sprite(t_index *m);
 void			index_sprite(t_index *m);
+void			screen_shot(t_index *m);
+void			init_cub(t_index *m);
 
 #endif

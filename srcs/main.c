@@ -6,32 +6,16 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 11:25:37 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:37:46 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
-int	init(t_index *m, char *arg)
+void	init(t_index *m, char *arg)
 {
-	if ((m->cub.m_ptr = mlx_init()) == NULL)
-		return (EXIT_FAILURE);
-	m->cub.win.w = 0;
-	m->cub.win.h = 0;
-	if ((m->cub.map = malloc(sizeof(m->cub.map))) == NULL)
-		ft_error(99);
-	m->cub.map[0] = ft_strdup("");
-	m->cub.pos.x = -1;
-	m->cub.pos.y = -1;
-	m->cub.dir.x = -1;
-	m->cub.dir.y = 0;
-	m->cub.plane.x = 0;
-	m->cub.plane.y = 0.66;
-	m->cub.no = NULL;
-	m->cub.so = NULL;
-	m->cub.ea = NULL;
-	m->cub.we = NULL;
+	init_cub(m);
+	m->move.moveSpeed = 0;
 	ft_move_init(m);
 	ft_parse(&m->cub, arg);
 	check_parse_error(&m->cub);
@@ -40,30 +24,35 @@ int	init(t_index *m, char *arg)
 	if ((m->sprite = malloc(sizeof(*m->sprite) * m->cub.nbrsprt)) == NULL)
 		ft_error(99);
 	index_sprite(m);
-	return (0);
 }
 
-int	loop(t_index *m)
+int		loop(t_index *m)
 {
 	m->img.img = mlx_new_image(m->cub.m_ptr, m->cub.win.w, m->cub.win.h);
 	m->img.addr = (int *)mlx_get_data_addr(m->img.img, &m->img.bits_per_pixel,
-										   &m->img.line_length, &m->img.endian);
+										&m->img.line_length, &m->img.endian);
 	m->img.line_length /= 4;
 	raycast(m);
+	m->cub.save ? screen_shot(m) : 0;
 	ft_move(m);
 	mlx_put_image_to_window(m->cub.m_ptr, m->cub.m_win, m->img.img, 0, 0);
 	mlx_destroy_image(m->cub.m_ptr, m->img.img);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_index	m;
-	
+
 	if (argc > 1)
 	{
-		if (init(&m, argv[1]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		init(&m, argv[1]);
+		if (argc == 3)
+			if (ft_memcmp(argv[2], "--save", sizeof(argv[2])))
+			{
+				m.cub.save = 1;
+				loop(&m);
+			}
 		m.cub.m_win = mlx_new_window(m.cub.m_ptr, m.cub.win.w, m.cub.win.h,
 				"Cub3D");
 		mlx_do_key_autorepeaton(m.cub.m_ptr);

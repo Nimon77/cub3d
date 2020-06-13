@@ -6,80 +6,89 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 20:37:44 by nsimon            #+#    #+#             */
-/*   Updated: 2020/05/26 17:22:43 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:17:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	go_up_down(t_cub *cub, int direction)
+void	go_up_down(t_index *m, int direction)
 {
-	float moveSpeed = MOVE_SPEED;
-	
+	t_cub	*cub;
+	float	movespeed;
+
+	cub = &m->cub;
+	movespeed = MOVE_SPEED + m->move.moveSpeed;
 	if (direction == 0)
 	{
-		if (cub->map[(int) (cub->pos.x + cub->dir.x * (moveSpeed + 0.1))]
-			[(int) cub->pos.y] != '1')
-			cub->pos.x += cub->dir.x * moveSpeed;
-		if (cub->map[(int) cub->pos.x]
-			[(int) (cub->pos.y + cub->dir.y * (moveSpeed + 0.1))] != '1')
-			cub->pos.y += cub->dir.y * moveSpeed;
+		if (cub->map[(int)(cub->pos.x + cub->dir.x * (movespeed + 0.1))]
+			[(int)cub->pos.y] != '1')
+			cub->pos.x += cub->dir.x * movespeed;
+		if (cub->map[(int)cub->pos.x]
+			[(int)(cub->pos.y + cub->dir.y * (movespeed + 0.1))] != '1')
+			cub->pos.y += cub->dir.y * movespeed;
 	}
 	else
 	{
-		if (cub->map[(int)(cub->pos.x - cub->dir.x * (moveSpeed + 0.1))]
+		if (cub->map[(int)(cub->pos.x - cub->dir.x * (movespeed + 0.1))]
 			[(int)cub->pos.y] != '1')
-			cub->pos.x -= cub->dir.x * moveSpeed;
+			cub->pos.x -= cub->dir.x * movespeed;
 		if (cub->map[(int)cub->pos.x]
-			[(int)(cub->pos.y - cub->dir.y * (moveSpeed + 0.1))] != '1')
-			cub->pos.y -= cub->dir.y * moveSpeed;
+			[(int)(cub->pos.y - cub->dir.y * (movespeed + 0.1))] != '1')
+			cub->pos.y -= cub->dir.y * movespeed;
 	}
 }
 
-void	go_left_right(t_cub *cub, int direction)
+void	go_left_right(t_index *m, int direction)
 {
-	float	moveSpeed = MOVE_SPEED;
-	
+	t_cub	*cub;
+	float	movespeed;
+
+	cub = &m->cub;
+	movespeed = MOVE_SPEED + m->move.moveSpeed;
 	if (direction == 0)
 	{
-		if (cub->map[(int) (cub->pos.x - cub->plane.x * (moveSpeed + 0.1))]
-			[(int) cub->pos.y] != '1')
-			cub->pos.x -= cub->plane.x * moveSpeed;
-		if (cub->map[(int) cub->pos.x]
-			[(int) (cub->pos.y - cub->plane.y * (moveSpeed + 0.1))] != '1')
-			cub->pos.y -= cub->plane.y * moveSpeed;
+		if (cub->map[(int)(cub->pos.x - cub->plane.x * (movespeed + 0.1))]
+			[(int)cub->pos.y] != '1')
+			cub->pos.x -= cub->plane.x * movespeed;
+		if (cub->map[(int)cub->pos.x]
+			[(int)(cub->pos.y - cub->plane.y * (movespeed + 0.1))] != '1')
+			cub->pos.y -= cub->plane.y * movespeed;
 	}
 	else
 	{
-		if (cub->map[(int)(cub->pos.x + cub->plane.x * (moveSpeed + 0.1))]
+		if (cub->map[(int)(cub->pos.x + cub->plane.x * (movespeed + 0.1))]
 			[(int)cub->pos.y] != '1')
-			cub->pos.x += cub->plane.x * moveSpeed;
+			cub->pos.x += cub->plane.x * movespeed;
 		if (cub->map[(int)cub->pos.x]
-			[(int)(cub->pos.y + cub->plane.y * (moveSpeed + 0.1))] != '1')
-			cub->pos.y += cub->plane.y * moveSpeed;
+			[(int)(cub->pos.y + cub->plane.y * (movespeed + 0.1))] != '1')
+			cub->pos.y += cub->plane.y * movespeed;
 	}
 }
 
 void	go_turn_left_right(t_cub *cub, int direction)
 {
-	double old_d_x = cub->dir.x;
-	double old_p_x = cub->plane.x;
-	float rotSpeed = ROTATE_SPEED;
-	
+	double	old_d_x;
+	double	old_p_x;
+	float	rotspeed;
+
+	old_d_x = cub->dir.x;
+	old_p_x = cub->plane.x;
+	rotspeed = ROTATE_SPEED;
 	if (direction == 0)
 	{
-		cub->dir.x = cub->dir.x * cos(rotSpeed) - cub->dir.y * sin(rotSpeed);
-		cub->dir.y = old_d_x * sin(rotSpeed) + cub->dir.y * cos(rotSpeed);
-		cub->plane.x = cub->plane.x * cos(rotSpeed) - cub->plane.y *
-				sin(rotSpeed);
-		cub->plane.y = old_p_x * sin(rotSpeed) + cub->plane.y * cos(rotSpeed);
+		cub->dir.x = cub->dir.x * cos(rotspeed) - cub->dir.y * sin(rotspeed);
+		cub->dir.y = old_d_x * sin(rotspeed) + cub->dir.y * cos(rotspeed);
+		cub->plane.x = cub->plane.x * cos(rotspeed) - cub->plane.y *
+				sin(rotspeed);
+		cub->plane.y = old_p_x * sin(rotspeed) + cub->plane.y * cos(rotspeed);
 	}
 	else
 	{
-		cub->dir.x = cub->dir.x * cos(-rotSpeed) - cub->dir.y * sin(-rotSpeed);
-		cub->dir.y = old_d_x * sin(-rotSpeed) + cub->dir.y * cos(-rotSpeed);
-		cub->plane.x = cub->plane.x * cos(-rotSpeed) - cub->plane.y *
-				sin(-rotSpeed);
-		cub->plane.y = old_p_x * sin(-rotSpeed) + cub->plane.y * cos(-rotSpeed);
+		cub->dir.x = cub->dir.x * cos(-rotspeed) - cub->dir.y * sin(-rotspeed);
+		cub->dir.y = old_d_x * sin(-rotspeed) + cub->dir.y * cos(-rotspeed);
+		cub->plane.x = cub->plane.x * cos(-rotspeed) - cub->plane.y *
+				sin(-rotspeed);
+		cub->plane.y = old_p_x * sin(-rotspeed) + cub->plane.y * cos(-rotspeed);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 11:27:32 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:04:53 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	quit(t_index *m)
 {
-	mlx_destroy_window(m->cub.m_ptr, m->cub.m_win);
+	!m->cub.save ? mlx_destroy_window(m->cub.m_ptr, m->cub.m_win) : 0;
 	mlx_destroy_image(m->cub.m_ptr, m->cub.no->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.ea->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.so->img);
@@ -22,7 +22,7 @@ int	quit(t_index *m)
 	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
 	ft_free_matrice(m->cub.map);
 	free(m->sprite);
-	//system("leaks cub3d");
+	system("leaks cub3d");
 	exit(0);
 }
 
@@ -42,6 +42,9 @@ int	ft_release(int keycode, t_move *move)
 		move->turn_left = 0;
 	else if (keycode == TURNRIGHT)
 		move->turn_right = 0;
+	else if (keycode == SPRINT)
+		move->moveSpeed = 0;
+	printf("%d\n", keycode);
 	return (0);
 }
 
@@ -61,15 +64,17 @@ int	ft_press(int keycode, t_move *move)
 		move->turn_left = 1;
 	else if (keycode == TURNRIGHT)
 		move->turn_right = 1;
+	else if (keycode == SPRINT)
+		move->moveSpeed = 0.15;
 	return (0);
 }
 
 int	ft_move(t_index *m)
 {
-	m->move.foward == 1 ? go_up_down(&m->cub, 0) : 0;
-	m->move.back == 1 ? go_up_down(&m->cub, 1) : 0;
-	m->move.left == 1 ? go_left_right(&m->cub, 0) : 0;
-	m->move.right == 1 ? go_left_right(&m->cub, 1) : 0;
+	m->move.foward == 1 ? go_up_down(m, 0) : 0;
+	m->move.back == 1 ? go_up_down(m, 1) : 0;
+	m->move.left == 1 ? go_left_right(m, 0) : 0;
+	m->move.right == 1 ? go_left_right(m, 1) : 0;
 	m->move.turn_left == 1 ? go_turn_left_right(&m->cub, 0) : 0;
 	m->move.turn_right == 1 ? go_turn_left_right(&m->cub, 1) : 0;
 	m->move.esc == 1 ? quit(m) : 0;

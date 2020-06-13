@@ -250,7 +250,8 @@ void		ft_parse(t_cub *cub, char *path)
 	int		fd;
 	char	*str;
 	
-	fd = open(path, O_RDONLY);
+	if ((fd = open(path, O_RDONLY)) < 0)
+		ft_error(15);
 	while (get_next_line(fd, &str) > 0)
 	{
 		if (cub->map[0][0] != '\0' && str[0] == '\0')

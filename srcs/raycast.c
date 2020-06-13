@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/06 16:44:28 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 17:13:10 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	write_img(t_index *m, int drawstart, int drawend, int x)
 		m->img.addr[i * m->img.line_length + x] = m->cub.plafond;
 		i++;
 	}
-	/* i = color_wall(m, i, x, drawend); */
 	i = textures_wall(m, i, x, drawend);
 	while (i < m->cub.win.h)
 	{
