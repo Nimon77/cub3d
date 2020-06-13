@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:59:09 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:13:10 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:01:43 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	calc_step_dist(t_index *m)
 	{
 		m->ray.stepx = 1;
 		m->ray.sidedistx = (m->ray.mapx + 1.0 - m->cub.pos.x) *
-						   m->ray.deltadistx;
+							m->ray.deltadistx;
 	}
 	if (m->ray.raydiry < 0)
 	{
@@ -71,10 +71,10 @@ void	dda(t_index *m)
 	}
 	if (m->ray.side == 0)
 		m->ray.perpwalldist = (m->ray.mapx - m->cub.pos.x +
-							   (1 - m->ray.stepx) / 2) / m->ray.raydirx;
+								(1 - m->ray.stepx) / 2) / m->ray.raydirx;
 	else
 		m->ray.perpwalldist = (m->ray.mapy - m->cub.pos.y +
-							   (1 - m->ray.stepy) / 2) / m->ray.raydiry;
+								(1 - m->ray.stepy) / 2) / m->ray.raydiry;
 }
 
 void	line_size(t_index *m)
@@ -88,28 +88,10 @@ void	line_size(t_index *m)
 		m->ray.drawend = m->cub.win.h - 1;
 }
 
-void	write_img(t_index *m, int drawstart, int drawend, int x)
-{
-	int i;
-	
-	i = 0;
-	while (i < drawstart)
-	{
-		m->img.addr[i * m->img.line_length + x] = m->cub.plafond;
-		i++;
-	}
-	i = textures_wall(m, i, x, drawend);
-	while (i < m->cub.win.h)
-	{
-		m->img.addr[i * m->img.line_length + x] = m->cub.sol;
-		i++;
-	}
-}
-
-int 	raycast(t_index *m)
+int		raycast(t_index *m)
 {
 	int x;
-	
+
 	x = 0;
 	while (x < m->cub.win.w)
 	{

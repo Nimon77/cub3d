@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:56:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/08 15:00:45 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:02:44 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	calc_vars(t_index *m, int i)
 			m->ray.step;
 }
 
-int	textures_wall(t_index *m, int i, int x, int drawend)
+int		textures_wall(t_index *m, int i, int x, int drawend)
 {
 	int	texy;
 	int color;
-	
+
 	find_current_tex(m);
 	calc_vars(m, i);
 	while (i < drawend)
@@ -63,4 +63,22 @@ int	textures_wall(t_index *m, int i, int x, int drawend)
 		i++;
 	}
 	return (i);
+}
+
+void	write_img(t_index *m, int drawstart, int drawend, int x)
+{
+	int i;
+
+	i = 0;
+	while (i < drawstart)
+	{
+		m->img.addr[i * m->img.line_length + x] = m->cub.plafond;
+		i++;
+	}
+	i = textures_wall(m, i, x, drawend);
+	while (i < m->cub.win.h)
+	{
+		m->img.addr[i * m->img.line_length + x] = m->cub.sol;
+		i++;
+	}
 }

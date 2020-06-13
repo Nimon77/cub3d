@@ -6,36 +6,22 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 11:34:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:25:09 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			verif_size(char *str)
-{
-	int	i;
-	
-	i = 2;
-	while (str[i] != '\0')
-	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void		get_size(char *str, t_cub *cub)
 {
 	int	i;
 	int size[2];
-	
+
 	i = 2;
 	if (cub->win.h != 0 && cub->win.w != 0)
 		ft_error(13);
 	if (verif_size(str))
-		return;
+		return ;
 	if (ft_isdigit(str[i]))
 	{
 		cub->win.w == 0 ? cub->win.w = ft_atoi(&str[i]) : 0;
@@ -48,17 +34,17 @@ void		get_size(char *str, t_cub *cub)
 	cub->win.w > size[1] ? cub->win.w = size[1] : 0;
 }
 
-t_texture 	*get_texture(char *str, t_cub *cub, t_texture *tex)
+t_texture	*get_texture(char *str, t_cub *cub, t_texture *tex)
 {
-	int	i;
-	int j;
-	t_texture *img;
-	char pth[256];
+	int			i;
+	int			j;
+	t_texture	*img;
+	char		pth[257];
 
 	tex != NULL ? ft_error(11) : 0;
 	i = 2;
 	j = check_textures(str);
-	ft_memset(&pth, 0, 256);
+	ft_memset(&pth, 0, 257);
 	while (str[i] == ' ' && str[i])
 		i++;
 	while (str[i] != ' ' && str[i])
@@ -72,25 +58,11 @@ t_texture 	*get_texture(char *str, t_cub *cub, t_texture *tex)
 	return (img);
 }
 
-void		ft_free_matrice(char **str)
-{
-	int		i;
-	
-	i = 0;
-	if (str)
-	{
-		while (str[i][0] != '\0')
-			free(str[i++]);
-		free(str[i]);
-		free(str);
-	}
-}
-
 void		get_map(char *str, t_cub *cub)
 {
-	int 	i[2];
+	int		i[2];
 	char	**tmp;
-	
+
 	i[0] = -1;
 	i[1] = 0;
 	while (cub->map[i[1]][0] != '\0')
@@ -106,108 +78,7 @@ void		get_map(char *str, t_cub *cub)
 	cub->map = tmp;
 }
 
-void check_color(char *str, t_color *rvb)
-{
-	int	i;
-	
-	i = 2;
-	rvb->r = -1;
-	rvb->v = -1;
-	rvb->b = -1;
-	while (str[i] == ' ' && str[i])
-		i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && str[i] != ',')
-			ft_error(12);
-		i++;
-	}
-}
-
-int			get_color(char *str)
-{
-	int		i;
-	t_color	rvb;
-	
-	i = 2;
-	while (str[i] == ' ' && str[i])
-		i++;
-	check_color(str, &rvb);
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.r == -1 &&
-				!ft_isdigit(str[i - 1]))
-			rvb.r = ft_atoi(&str[i]);
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.v == -1 &&
-				rvb.r != -1)
-			rvb.r > -1 ? rvb.v = ft_atoi(&str[i]) : 0;
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.b == -1 &&
-				rvb.r != -1 && rvb.v != -1)
-			rvb.r > -1 && rvb.v > -1 ? rvb.b = ft_atoi(&str[i]) : 0;
-		i++;
-	}
-	if (rvb.r < 0 || rvb.v < 0 || rvb.b < 0 || rvb.r > 255 || rvb.v > 255 ||
-	        rvb.b > 255)
-		return (-1);
-	return ((rvb.r * 256 * 256) + (rvb.v * 256) + (rvb.b));
-}
-
-void		calc_dir(t_cub *cub, char c)
-{
-	cub->dir.x = 0;
-	cub->dir.y = 0;
-	cub->plane.x = 0;
-	cub->plane.y = 0;
-	if (c == 'N')
-	{
-		cub->dir.x = -1;
-		cub->plane.y = 0.66;
-	}
-	else if (c == 'S')
-	{
-		cub->dir.x = 1;
-		cub->plane.y = -0.66;
-	}
-	else if (c == 'W')
-	{
-		cub->dir.y = -1;
-		cub->plane.x = -0.66;
-	}
-	else if (c == 'E')
-	{
-		cub->dir.y = 1;
-		cub->plane.x = 0.66;
-	}
-}
-
-void		get_pose(char **map, t_cub *cub)
-{
-	int x;
-	int y;
-	
-	x = 0;
-	while (map[x][0] != 0)
-	{
-		y = 0;
-		while (map[x][y])
-		{
-			if (ft_isalpha(map[x][y]) && cub->pos.x != -1 && cub->pos.y != -1)
-				ft_error(6);
-			if ((map[x][y] == 'N' || map[x][y] == 'E' || map[x][y] == 'S' ||
-					map[x][y] == 'W') && cub->pos.x == -1 && cub->pos.y == -1)
-			{
-				cub->pos.x = x + 0.5;
-				cub->pos.y = y + 0.5;
-				calc_dir(cub, map[x][y]);
-				cub->map[x][y] = '0';
-			}
-			y++;
-		}
-		x++;
-	}
-}
-
-void 		ft_select(char *str, t_cub *cub)
+void		ft_select(char *str, t_cub *cub)
 {
 	str[0] == 'R' ? get_size(str, cub) : 0;
 	if (str[0] == 'N' && str[1] == 'O')
@@ -225,37 +96,17 @@ void 		ft_select(char *str, t_cub *cub)
 	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
 }
 
-void		get_sprite(char **map, t_cub *cub)
-{
-	int i;
-	int j;
-	
-	i = 0;
-	cub->nbrsprt = 0;
-	while (map[i][0])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] > '1')
-				cub->nbrsprt++;
-			j++;
-		}
-		i++;
-	}
-}
-
 void		ft_parse(t_cub *cub, char *path)
 {
 	int		fd;
 	char	*str;
-	
+
 	if ((fd = open(path, O_RDONLY)) < 0)
 		ft_error(15);
 	while (get_next_line(fd, &str) > 0)
 	{
 		if (cub->map[0][0] != '\0' && str[0] == '\0')
-			break;
+			break ;
 		ft_select(str, cub);
 		free(str);
 	}

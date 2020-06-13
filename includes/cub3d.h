@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:47:59 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:04:53 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:19:10 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ void			go_up_down(t_index *m, int direction);
 void			go_left_right(t_index *m, int direction);
 void			go_turn_left_right(t_cub *cub, int direction);
 int				check_map(t_cub *cub);
-int				color_wall(t_index *m, int i, int x, int drawEnd);
 int				textures_wall(t_index *m, int i, int x, int drawEnd);
 int				ft_move(t_index *m);
 int				ft_release(int keycode, t_move *move);
@@ -211,5 +210,13 @@ void			manage_sprite(t_index *m);
 void			index_sprite(t_index *m);
 void			screen_shot(t_index *m);
 void			init_cub(t_index *m);
+void			write_img(t_index *m, int drawstart, int drawend, int x);
+void			init_sprite(t_index *m, int i);
+void			ft_free_matrice(char **str);
+void			check_color(char *str, t_color *rvb);
+int				verif_size(char *str);
+void			calc_dir(t_cub *cub, char c);
+void			get_pose(char **map, t_cub *cub);
+void			get_sprite(char **map, t_cub *cub);
 
 #endif

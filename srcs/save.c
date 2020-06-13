@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 14:08:54 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 17:53:28 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:03:11 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	write_header(int fd, t_index *m, int tmp, int file_size)
 {
 	char	header[54];
-	
+
 	ft_bzero(header, 54);
 	header[0] = (unsigned char)('B');
 	header[1] = (unsigned char)('M');
@@ -41,9 +41,9 @@ void	write_header(int fd, t_index *m, int tmp, int file_size)
 
 void	write_data(int fd, t_index *m)
 {
-	char 	*tmp;
+	char	*tmp;
 	int		i;
-	
+
 	i = 0;
 	tmp = (char *)m->img.addr;
 	while (i < m->cub.win.h)
@@ -55,7 +55,7 @@ void	screen_shot(t_index *m)
 	int	fd;
 	int	tmp;
 	int	file_size;
-	
+
 	if ((fd = open("screenshot.bmp", O_CREAT | O_RDWR, S_IRWXU)) < 0)
 		quit(m);
 	tmp = m->cub.win.w;

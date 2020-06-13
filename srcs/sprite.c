@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 17:37:15 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/08 14:57:00 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 18:09:30 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	index_sprite(t_index *m)
 	int	count;
 	int i;
 	int j;
-	
+
 	i = 0;
 	count = 0;
 	while (m->cub.map[i][0])
@@ -40,10 +40,9 @@ void	index_sprite(t_index *m)
 void	sort_sprite(t_index *m)
 {
 	int			i;
-	int 		j;
+	int			j;
 	t_sprite	tmp;
-	
-	
+
 	i = 0;
 	while (i < m->cub.nbrsprt)
 	{
@@ -62,39 +61,35 @@ void	sort_sprite(t_index *m)
 	}
 }
 
-void	init_sprite(t_index *m, int i)
+void	draw_sprite(t_index *m, int j)
 {
-	m->sprcalc.spr_x = m->sprite[i].x - m->cub.pos.x + 0.5;
-	m->sprcalc.spr_y = m->sprite[i].y - m->cub.pos.y + 0.5;
-	m->sprcalc.invert = 1 / (m->cub.plane.x * m->cub.dir.y - m->cub.dir.x *
-															 m->cub.plane.y);
-	m->sprcalc.trsfm_x = m->sprcalc.invert * (m->cub.dir.y *
-			m->sprcalc.spr_x - m->cub.dir.x * m->sprcalc.spr_y);
-	m->sprcalc.trsfm_y = m->sprcalc.invert * (-m->cub.plane.y *
-			m->sprcalc.spr_x + m->cub.plane.x * m->sprcalc.spr_y);
-	m->sprcalc.sprscreen_x = (int)((m->cub.win.w / 2) *
-			(1 + m->sprcalc.trsfm_x / m->sprcalc.trsfm_y));
-	m->sprcalc.spr_h = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
-	m->sprcalc.drawstart_y = -m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
-	m->sprcalc.drawstart_y < 0 ? m->sprcalc.drawstart_y = 0 : 0;
-	m->sprcalc.drawend_y = m->sprcalc.spr_h / 2 + m->cub.win.h / 2;
-	m->sprcalc.drawend_y >= m->cub.win.h ?
-			m->sprcalc.drawend_y = m->cub.win.h - 1 : 0;
-	m->sprcalc.spr_w = abs((int)(m->cub.win.h / m->sprcalc.trsfm_y));
-	m->sprcalc.drawstart_x = -m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
-	m->sprcalc.drawstart_x < 0 ? m->sprcalc.drawstart_x = 0 : 0;
-	m->sprcalc.drawend_x = m->sprcalc.spr_w / 2 + m->sprcalc.sprscreen_x;
-	m->sprcalc.drawend_x >= m->cub.win.w ?
-			m->sprcalc.drawend_x = m->cub.win.w - 1 : 0;
-	m->sprcalc.strip = m->sprcalc.drawstart_x;
+	int d;
+
+	while (j < m->sprcalc.drawend_y)
+	{
+		d = j * 256 - m->cub.win.h * 128 + m->sprcalc.spr_h * 128;
+		m->sprcalc.texy = ((d * m->cub.sprite->size.h) /
+							m->sprcalc.spr_h) / 256;
+		if (m->cub.sprite->size.h < 64 && APPLE)
+			m->sprcalc.color = &m->cub.sprite->addr[
+					m->cub.sprite->size.w * (m->sprcalc.texy * 64 /
+					m->cub.sprite->size.h) + m->sprcalc.texx];
+		else
+			m->sprcalc.color = &m->cub.sprite->addr[
+					m->cub.sprite->size.w * m->sprcalc.texy +
+					m->sprcalc.texx];
+		if ((*m->sprcalc.color & 0x00FFFFFF) != 0)
+			m->img.addr[j * m->img.line_length +
+						m->sprcalc.strip] = *m->sprcalc.color;
+		j++;
+	}
 }
 
 void	sprite_project(t_index *m)
 {
 	int	i;
 	int	j;
-	int d;
-	
+
 	i = 0;
 	while (i < m->cub.nbrsprt)
 	{
@@ -106,26 +101,9 @@ void	sprite_project(t_index *m)
 							/ m->sprcalc.spr_w) / 256;
 			j = m->sprcalc.drawstart_y;
 			if (m->sprcalc.trsfm_y > 0 && m->sprcalc.strip > 0 &&
-				m->sprcalc.strip < m->cub.win.w &&
-				m->sprcalc.trsfm_y < m->ray.zbuff[m->sprcalc.strip])
-				while (j < m->sprcalc.drawend_y)
-				{
-					d = j * 256 - m->cub.win.h * 128 + m->sprcalc.spr_h * 128;
-					m->sprcalc.texy = ((d * m->cub.sprite->size.h) /
-							m->sprcalc.spr_h) / 256;
-					if (m->cub.sprite->size.h < 64 && APPLE)
-						m->sprcalc.color = &m->cub.sprite->addr[
-								m->cub.sprite->size.w * (m->sprcalc.texy * 64 /
-								m->cub.sprite->size.h) + m->sprcalc.texx];
-					else
-						m->sprcalc.color = &m->cub.sprite->addr[
-							m->cub.sprite->size.w * m->sprcalc.texy +
-							m->sprcalc.texx];
-					if ((*m->sprcalc.color & 0x00FFFFFF) != 0)
-						m->img.addr[j * m->img.line_length +
-							m->sprcalc.strip] = *m->sprcalc.color;
-					j++;
-				}
+					m->sprcalc.strip < m->cub.win.w &&
+					m->sprcalc.trsfm_y < m->ray.zbuff[m->sprcalc.strip])
+				draw_sprite(m, j);
 			m->sprcalc.strip++;
 		}
 		i++;
