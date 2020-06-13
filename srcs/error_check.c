@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:07:42 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/11 17:03:33 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 11:34:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		check_textures(char *str)
 
 void	ft_error(int error)
 {
-	system("leaks cub3d");
 	error == 1 ? printf("Error\nResolution\n") : 0;
 	error == 2 ? printf("Error\nTextures\n") : 0;
 	error == 3 ? printf("Error\nSprite\n") : 0;
@@ -97,8 +96,9 @@ void	ft_error(int error)
 	error == 10 ? printf("Error\nOpen textures\n") : 0;
 	error == 11 ? printf("Error\nMultiple textures for side or sprite\n") : 0;
 	error == 12 ? printf("Error\nError color of floor or sky\n") : 0;
+	error == 13 ? printf("Error\nMultiple resolution\n") : 0;
 	error == 99 ? printf("Error\nMalloc\n") : 0;
-	exit(error);
+	exit(0);
 }
 
 void	check_parse_error(t_cub *cub)

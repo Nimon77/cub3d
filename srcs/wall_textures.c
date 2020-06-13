@@ -15,13 +15,13 @@
 void	find_current_tex(t_index *m)
 {
 	if (m->ray.raydiry >= 0 && m->ray.side == 1)
-		m->ray.current = m->cub.ea;
-	else if (m->ray.raydiry < 0 && m->ray.side == 1)
 		m->ray.current = m->cub.we;
+	else if (m->ray.raydiry < 0 && m->ray.side == 1)
+		m->ray.current = m->cub.ea;
 	else if (m->ray.raydirx >= 0 && m->ray.side == 0)
-		m->ray.current = m->cub.so;
-	else
 		m->ray.current = m->cub.no;
+	else
+		m->ray.current = m->cub.so;
 }
 
 void	calc_vars(t_index *m, int i)

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 03:38:10 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 11:34:14 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void		get_size(char *str, t_cub *cub)
 	int size[2];
 	
 	i = 2;
+	if (cub->win.h != 0 && cub->win.w != 0)
+		ft_error(13);
 	if (verif_size(str))
 		return;
 	if (ft_isdigit(str[i]))
@@ -256,8 +258,7 @@ void		ft_parse(t_cub *cub, char *path)
 		ft_select(str, cub);
 		free(str);
 	}
-	if (str[0] != '\0' && cub->map[0][0] == '\0')
-		ft_select(str, cub);
+	ft_select(str, cub);
 	free(str);
 	get_pose(cub->map, cub);
 	get_sprite(cub->map, cub);

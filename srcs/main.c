@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:21:10 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 03:21:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 11:25:37 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ int	main(int argc, char **argv)
 		mlx_do_key_autorepeaton(m.cub.m_ptr);
 		mlx_hook(m.cub.m_win, PRESS_EVENT, PRESS_MASK, ft_press, &m.move);
 		mlx_hook(m.cub.m_win, RELEASE_EVENT, RELEASE_MASK, ft_release, &m.move);
-		mlx_hook(m.cub.m_win, 17, 0, &quit, &m.cub);
+		mlx_hook(m.cub.m_win, 17, 0, &quit, &m);
 		mlx_loop_hook(m.cub.m_ptr, &loop, &m);
 		mlx_loop(m.cub.m_ptr);
-		quit(&m);
 	}
 }

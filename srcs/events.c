@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 20:47:40 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/06 16:45:36 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/13 11:27:32 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int	quit(t_index *m)
 {
-	printf("quit\n");
 	mlx_destroy_window(m->cub.m_ptr, m->cub.m_win);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.no->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.ea->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.so->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.we->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
-	mlx_destroy_image(m->cub.m_ptr, m->img.img);
 	ft_free_matrice(m->cub.map);
 	free(m->sprite);
-	system("leaks cub3d");
+	//system("leaks cub3d");
 	exit(0);
 }
 
