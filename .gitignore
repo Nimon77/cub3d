@@ -52,3 +52,6 @@ gen
 /cmake-build-debug/
 objs
 
+Cub3D
+screenshot.bmp
+*.a
