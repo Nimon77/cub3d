@@ -12,6 +12,20 @@
 
 #include "cub3d.h"
 
+void	check_param(char **argv, int argc)
+{
+	if (argc >= 2)
+		ft_memcmp(argv[1], "--help", 6) == 0 ||
+		ft_memcmp(argv[1], "-h", 2) == 0? ft_error(97) : 0;
+	if (argc == 3)
+		ft_memcmp(argv[2], "--help", 6) == 0 ||
+		ft_memcmp(argv[2], "-h", 2) == 0 ? ft_error(97) : 0;
+	ft_strnstr(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) == NULL ?
+			ft_error(96) : 0;
+	if (argc == 3)
+		ft_memcmp(argv[2], "--save", 6) != 0 ? ft_error(98) : 0;
+}
+
 void	init(t_index *m, char *arg)
 {
 	init_cub(m);
@@ -43,12 +57,13 @@ int		loop(t_index *m)
 int		main(int argc, char **argv)
 {
 	t_index	m;
-
-	if (argc > 1)
+	
+	check_param(argv, argc);
+	if (argc > 1 && argc <= 3)
 	{
 		init(&m, argv[1]);
 		if (argc == 3)
-			if (ft_memcmp(argv[2], "--save", sizeof(argv[2])))
+			if (ft_memcmp(argv[2], "--save", 6) == 0)
 			{
 				m.cub.save = 1;
 				loop(&m);
@@ -62,4 +77,5 @@ int		main(int argc, char **argv)
 		mlx_loop_hook(m.cub.m_ptr, &loop, &m);
 		mlx_loop(m.cub.m_ptr);
 	}
+	ft_error(98);
 }

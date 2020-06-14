@@ -58,6 +58,10 @@ void			ft_error(int error)
 	error == 13 ? ft_printf("Error\nMultiple resolution\n") : 0;
 	error == 14 ? ft_printf("Error\nmlx_init impossible\n") : 0;
 	error == 15 ? ft_printf("Error\n.cub file not found or corrupted") : 0;
+	error == 96 ? ft_printf("Error\nMap is not .cub format\n") : 0;
+	error == 97 ? ft_printf("Usage : ./Cub3D map.cub\nOption : --save\n") : 0;
+	error == 98 ? ft_printf("Error\nUsage : ./Cub3D map.cub\nOption : --save\n")
+				: 0;
 	error == 99 ? ft_printf("Error\nMalloc\n") : 0;
 	exit(0);
 }
@@ -67,6 +71,7 @@ void			check_parse_error(t_cub *cub)
 	int	map_error;
 
 	cub->win.w <= 0 || cub->win.h <= 0 ? ft_error(1) : 0;
+	!cub->no || !cub->so || !cub->ea || !cub->we ? ft_error(2) : 0;
 	!cub->no->img || !cub->ea->img || !cub->so->img || !cub->we->img ?
 		ft_error(2) : 0;
 	!cub->sprite->img ? ft_error(3) : 0;

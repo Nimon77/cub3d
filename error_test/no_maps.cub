@@ -1,0 +1,12 @@
+R 1280 720
+
+NO ./images/fractal1.xpm
+SO ./images/fractal2.xpm
+WE ./images/fractal3.xpm
+EA ./images/fractal4.xpm
+
+S ./images/end_crystal.xpm
+
+F 100,100,100
+C 37,25,233
+

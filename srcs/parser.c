@@ -22,6 +22,8 @@ void		get_size(char *str, t_cub *cub)
 		ft_error(13);
 	if (verif_size(str))
 		return ;
+	while (!ft_isdigit(str[i]))
+		i++;
 	if (ft_isdigit(str[i]))
 	{
 		cub->win.w == 0 ? cub->win.w = ft_atoi(&str[i]) : 0;

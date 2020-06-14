@@ -44,6 +44,8 @@ void	init_cub(t_index *m)
 	m->cub.ea = NULL;
 	m->cub.we = NULL;
 	m->cub.sprite = NULL;
+	m->cub.sol = -1;
+	m->cub.plafond = -1;
 }
 
 void	init_sprite(t_index *m, int i)
