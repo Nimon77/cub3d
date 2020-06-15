@@ -21,6 +21,7 @@ int	quit(t_index *m)
 	mlx_destroy_image(m->cub.m_ptr, m->cub.we->img);
 	mlx_destroy_image(m->cub.m_ptr, m->cub.sprite->img);
 	ft_free_matrice(m->cub.map);
+	free(m->ray.zbuff);
 	free(m->sprite);
 	exit(0);
 }

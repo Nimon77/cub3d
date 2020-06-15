@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 20:11:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 19:32:42 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/15 18:29:00 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,25 @@ void		get_map(char *str, t_cub *cub)
 
 static void	ft_select(char *str, t_cub *cub)
 {
-	str[0] == 'R' ? get_size(str, cub) : 0;
-	if (str[0] == 'N' && str[1] == 'O')
+	int i;
+
+	i = 0;
+	str[0] == 'R' && str[1] == ' ' ? get_size(str, cub) : 0;
+	if (str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
 		cub->no = get_texture(str, cub, cub->no);
-	if (str[0] == 'S' && str[1] == 'O')
+	if (str[0] == 'S' && str[1] == 'O' && str[2] == ' ')
 		cub->so = get_texture(str, cub, cub->so);
-	if (str[0] == 'W' && str[1] == 'E')
+	if (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
 		cub->we = get_texture(str, cub, cub->we);
-	if (str[0] == 'E' && str[1] == 'A')
+	if (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
 		cub->ea = get_texture(str, cub, cub->ea);
 	if (str[0] == 'S' && str[1] == ' ')
 		cub->sprite = get_texture(str, cub, cub->sprite);
-	str[0] == 'F' ? cub->sol = get_color(str) : 0;
-	str[0] == 'C' ? cub->plafond = get_color(str) : 0;
-	ft_isdigit(str[0]) || str[0] == ' ' ? get_map(str, cub) : 0;
+	str[0] == 'F' && str[1] == ' ' ? cub->sol = get_color(str) : 0;
+	str[0] == 'C' && str[1] == ' ' ? cub->plafond = get_color(str) : 0;
+	while (str[i++] == ' ')
+		ft_isdigit(str[i]) ? get_map(str, cub) : 0;
+	ft_isdigit(str[0]) ? get_map(str, cub) : 0;
 }
 
 void		ft_parse(t_cub *cub, char *path)
