@@ -53,7 +53,8 @@ void			ft_error(int error)
 	error == 8 ? ft_printf("Error\nTexture not XPM format\n") : 0;
 	error == 9 ? ft_printf("Error\nSprite not XPM format\n") : 0;
 	error == 10 ? ft_printf("Error\nOpen textures\n") : 0;
-	error == 11 ? ft_printf("Error\nMultiple textures for side or sprite\n") : 0;
+	error == 11 ? ft_printf("Error\nMultiple textures for side or sprite\n")
+				: 0;
 	error == 12 ? ft_printf("Error\nError color of floor or sky\n") : 0;
 	error == 13 ? ft_printf("Error\nMultiple resolution\n") : 0;
 	error == 14 ? ft_printf("Error\nmlx_init impossible\n") : 0;

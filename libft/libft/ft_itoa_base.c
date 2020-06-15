@@ -6,18 +6,18 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 11:09:12 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/23 11:09:21 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/15 11:55:55 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_reverse(char *conv)
+static char		*ft_reverse(char *conv)
 {
 	int		i;
 	int		size;
 	char	*tmp;
-	
+
 	size = (int)ft_strlen(conv) - 1;
 	i = 0;
 	if (!(tmp = (char *)malloc(sizeof(tmp) * size + 1)))
@@ -33,7 +33,7 @@ static int		convert_base(unsigned int nbr, char *base, char *value)
 	int		i;
 	int		baselen;
 	int		tmp;
-	
+
 	i = 0;
 	baselen = ft_strlen(base);
 	while (nbr != 0)
@@ -50,7 +50,7 @@ static int		check_base(char *str)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	if (ft_strlen(str) < 2)
 		return (0);
@@ -72,12 +72,12 @@ static int		check_base(char *str)
 	return (1);
 }
 
-char	*ft_itoa_base(int nbr, char *base)
+char			*ft_itoa_base(int nbr, char *base)
 {
 	int		i;
 	char	value[34];
 	char	neg;
-	
+
 	i = 0;
 	if (check_base(base))
 	{

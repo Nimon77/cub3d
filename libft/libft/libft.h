@@ -14,7 +14,6 @@
 # define LIBFT_H
 
 # define BUFFER_SIZE 512
-# define ABS(x) ((x < 0) ? (-x) : (x))
 
 # include <stdlib.h>
 # include <unistd.h>

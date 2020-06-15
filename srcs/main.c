@@ -16,7 +16,7 @@ void	check_param(char **argv, int argc)
 {
 	if (argc >= 2)
 		ft_memcmp(argv[1], "--help", 6) == 0 ||
-		ft_memcmp(argv[1], "-h", 2) == 0? ft_error(97) : 0;
+		ft_memcmp(argv[1], "-h", 2) == 0 ? ft_error(97) : 0;
 	if (argc == 3)
 		ft_memcmp(argv[2], "--help", 6) == 0 ||
 		ft_memcmp(argv[2], "-h", 2) == 0 ? ft_error(97) : 0;
@@ -57,7 +57,7 @@ int		loop(t_index *m)
 int		main(int argc, char **argv)
 {
 	t_index	m;
-	
+
 	check_param(argv, argc);
 	if (argc > 1 && argc <= 3)
 	{

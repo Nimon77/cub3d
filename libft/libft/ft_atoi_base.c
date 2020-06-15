@@ -13,7 +13,7 @@
 static int		ft_strstr(char *str, char to_find)
 {
 	int		i;
-	
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -32,7 +32,7 @@ static int		is_spec_print(char c)
 	return (0);
 }
 
-static void	str_neg(int *neg)
+static void		str_neg(int *neg)
 {
 	if (*neg == -1)
 		*neg = 1;
@@ -44,7 +44,7 @@ static int		check_base(char *str, int baselen)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	if (baselen < 2)
 		return (0);
@@ -66,13 +66,13 @@ static int		check_base(char *str, int baselen)
 	return (1);
 }
 
-int		ft_atoi_base(char *str, char *base)
+int				ft_atoi_base(char *str, char *base)
 {
 	int i;
 	int value;
 	int baselen;
 	int neg;
-	
+
 	i = 0;
 	value = 0;
 	baselen = 0;

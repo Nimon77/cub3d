@@ -19,8 +19,8 @@ void	init_raycast(t_index *m, int x)
 	m->ray.raydiry = m->cub.dir.y + m->cub.plane.y * m->ray.camerax;
 	m->ray.mapx = (int)m->cub.pos.x;
 	m->ray.mapy = (int)m->cub.pos.y;
-	m->ray.deltadistx = ABS(1 / m->ray.raydirx);
-	m->ray.deltadisty = ABS(1 / m->ray.raydiry);
+	m->ray.deltadistx = fabs(1 / m->ray.raydirx);
+	m->ray.deltadisty = fabs(1 / m->ray.raydiry);
 	m->ray.hit = 0;
 }
 
