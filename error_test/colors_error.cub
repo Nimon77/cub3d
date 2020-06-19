@@ -7,7 +7,7 @@ EA ./images/fractal4.xpm
 
 S ./images/end_crystal.xpm
 
-F 100,100f,100
+F 100,10f0,100
 C 37,25,233
 
         1111111111111111111111111

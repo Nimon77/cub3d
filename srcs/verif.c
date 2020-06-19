@@ -40,7 +40,7 @@ void	check_color(char *str, t_color *rvb)
 	while (str[i])
 	{
 		j = i;
-		if (ft_isdigit(str[i]))
+		if (ft_isdigit(str[j]))
 			while (ft_isdigit(str[j++]))
 				if (str[j] == ' ')
 					while (str[j] != ',' || ft_isdigit(str[j]))
