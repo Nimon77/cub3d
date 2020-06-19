@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 18:14:21 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 19:32:42 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/19 15:29:25 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		verif_size(char *str)
 void	check_color(char *str, t_color *rvb)
 {
 	int	i;
+	int j;
 
 	i = 2;
 	rvb->r = -1;
@@ -38,7 +39,14 @@ void	check_color(char *str, t_color *rvb)
 		i++;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ',')
+		j = i;
+		if (ft_isdigit(str[i]))
+			while (ft_isdigit(str[j++]))
+				if (str[j] == ' ')
+					while (str[j] != ',' || ft_isdigit(str[j]))
+						if (ft_isdigit(str[j++]))
+							ft_error(12);
+		if (!ft_isdigit(str[i]) && str[i] != ',' && str[i] != ' ')
 			ft_error(12);
 		i++;
 	}

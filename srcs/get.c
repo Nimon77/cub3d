@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 18:20:27 by nsimon            #+#    #+#             */
-/*   Updated: 2020/06/13 18:26:28 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/06/19 15:19:59 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,22 @@ int			get_color(char *str)
 	t_color	rvb;
 
 	i = 2;
+	check_color(str, &rvb);
 	while (str[i] == ' ' && str[i])
 		i++;
-	check_color(str, &rvb);
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]) && str[i - 1] != ',' && rvb.r == -1 &&
-			!ft_isdigit(str[i - 1]))
-			rvb.r = ft_atoi(&str[i]);
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.v == -1 &&
-				rvb.r != -1)
-			rvb.r > -1 ? rvb.v = ft_atoi(&str[i]) : 0;
-		else if (ft_isdigit(str[i]) && str[i - 1] == ',' && rvb.b == -1 &&
-				rvb.r != -1 && rvb.v != -1)
-			rvb.r > -1 && rvb.v > -1 ? rvb.b = ft_atoi(&str[i]) : 0;
+	rvb.r = ft_atoi(&str[i]);
+	while (str[i] != ',' && str[i])
 		i++;
-	}
+	i++;
+	while (str[i] == ' ' && str[i])
+		i++;
+	rvb.v = ft_atoi(&str[i]);
+	while (str[i] != ',' && str[i])
+		i++;
+	i++;
+	while (str[i] == ' ' && str[i])
+		i++;
+	rvb.b = ft_atoi(&str[i]);
 	if (rvb.r < 0 || rvb.v < 0 || rvb.b < 0 || rvb.r > 255 || rvb.v > 255 ||
 		rvb.b > 255)
 		return (-1);
