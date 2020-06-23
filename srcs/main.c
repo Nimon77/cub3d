@@ -20,7 +20,8 @@ void	check_param(char **argv, int argc)
 	if (argc == 3)
 		ft_memcmp(argv[2], "--help", 7) == 0 ||
 		ft_memcmp(argv[2], "-h", 3) == 0 ? ft_error(97) : 0;
-	ft_strnstr(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5) == NULL ?
+	if (argc > 1)
+		ft_strnstr(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5) == NULL ?
 			ft_error(96) : 0;
 	if (argc == 3)
 		ft_memcmp(argv[2], "--save", 7) != 0 ? ft_error(98) : 0;
